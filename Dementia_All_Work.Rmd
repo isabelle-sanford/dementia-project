@@ -1,0 +1,1582 @@
+---
+title: "Dementia Project"
+author: "Isabelle Sanford"
+date: "1/10/2020"
+output: html_document
+---
+
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(hexbin)
+library(RColorBrewer)
+library(ggrepel)
+library(viridisLite)
+library(foreign)
+```
+
+
+```{r}
+d1 <- read_csv("Data2.csv")
+d1
+```
+
+```{r}
+
+labels <- read_csv("Labels2.csv")
+labels
+
+```
+
+
+```{r}
+# changing column names
+labels <- filter(labels, is.na(New) == FALSE)
+names(d1) <- labels$New
+
+
+d2 <- select(d1,-delete1, -delete2, -delete, -delete3, -delete4, -delete5)
+
+
+d3 <- filter(d2, R65plus == 1 | S65plus == 1)
+
+View(d3)
+
+# DO NOT ATTACH
+
+```
+
+
+
+```{r}
+tail(d3)
+```
+
+
+PhD 7
+MA 6
+Bach 5
+Assoc 4
+Yr coll 3
+HS / GED 2
+grade 1-11 > 1
+
+```{r}
+#d4test <- filter(d3, FID68 > 1547)
+#d4test
+#what are these errors and why are they happening
+attach(d3)
+Reduc <- ifelse(Rhighest_degree > 3, 7, ifelse(Rhighest_degree == 3, 6, ifelse(Rhighest_degree == 2, 5, ifelse(Rhighest_degree == 1, 4, ifelse(Rwtr_uni == 1, 3, ifelse(Rwtr_hsgrad < 3, 2, 1)))))) 
+
+Seduc <- ifelse(Shighest_degree > 3, 7, ifelse(Shighest_degree == 3, 6, ifelse(Shighest_degree == 2, 5, ifelse(Shighest_degree == 1, 4, ifelse(Swtr_uni == 1, 3, ifelse(Swtr_hsgrad < 3, 2, 1))))))
+# there is definitely a more elegant way to do this
+```
+
+```{r}
+d4 <- mutate(d3, Reduc = Reduc, Seduc = Seduc)
+# REMOVING OTHER EDUCATION COLUMNS NOW
+
+d5 <- select(d4, -c(Swtr_hsgrad, Sged_grade, Shs_grade, Swtr_uni, Suni_grade, Swtr_unigrad, Shighest_degree, Rwtr_hsgrad, Rged_grade, Rhs_grade, Rwtr_uni, Runi_grade, Rwtr_unigrad, Rhighest_degree, Rhs_or_ged, Rged_grade_, Runi_wtr, Runigrad_wtr, Rhigh_degree))
+
+d5
+
+```
+
+```{r}
+# making a dementia variable
+detach(d3)
+attach(d5)
+
+Rdscore <- ifelse(Rc_decisions == 1, 1, 0) + 
+  ifelse(Rc_interest == 1, 1, 0) + 
+  ifelse(Rc_story_repeats== 1, 1, 0) + 
+  ifelse(Rc_learning == 1, 1, 0) + 
+  ifelse(Rc_datemem == 1, 1, 0) + 
+  ifelse(Rc_money == 1, 1, 0) + 
+  ifelse(Rc_apptmem == 1, 1, 0) + 
+  ifelse(Rc_memory == 1, 1, 0)
+
+Sdscore <- ifelse(Sc_decisions == 1, 1, 0) + 
+  ifelse(Sc_interest == 1, 1, 0) + 
+  ifelse(Sc_story_repeats== 1, 1, 0) + 
+  ifelse(Sc_learning == 1, 1, 0) + 
+  ifelse(Sc_datemem == 1, 1, 0) + 
+  ifelse(Sc_money == 1, 1, 0) + 
+  ifelse(Sc_apptmem == 1, 1, 0) + 
+  ifelse(Sc_memory == 1, 1, 0)
+
+Sdscore
+
+d6 <- d5 %>% 
+  select(-c(Rc_interest, Rc_story_repeats, Rc_learning, Rc_datemem, Rc_money, Rc_apptmem, Rc_memory, Sc_interest, Sc_story_repeats, Sc_learning, Sc_datemem, Sc_money, Sc_apptmem, Sc_memory, Rc_decisions, Sc_decisions)) %>% 
+  mutate(Rdscore = Rdscore, Sdscore = Sdscore)
+
+d6 # does not include individual dementia factors
+
+detach(d5)
+
+```
+
+```{r}
+#FID17 <- as.factor(FID17)
+
+
+d6 %>% 
+  filter(Rage > 65) %>% 
+  ggplot(aes(Reduc, Rdscore, group = Reduc)) +
+  geom_jitter() +
+  stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4)
+
+#jitter isn't v helpful
+
+```
+```{r}
+d6 %>% 
+  filter(Sage > 65) %>% 
+  ggplot(aes(Seduc, Sdscore, group = Seduc)) +
+  geom_jitter() +
+  stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4)
+```
+
+
+```{r}
+Rdwtr <- ifelse(Rdscore > 1, 1, 0)
+d6 <- mutate(d6, Rdwtr = Rdwtr)
+```
+
+
+```{r}
+d6 %>% 
+  filter(Rage > 65) %>% 
+  ggplot(aes(Rage, Rdscore, color = Reduc)) +
+  geom_jitter() +
+  stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4)
+
+d6 %>% 
+  filter(Rage > 65) %>% 
+  ggplot(aes(Reduc, Rdscore, color = Rage)) +
+  geom_jitter() +
+  stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4)
+
+#VERY PRETTY but not very useful :(
+
+
+#IDEAS: Rdscore vs Sdscore, graph mean trend, look at dementia vs not
+
+```
+
+```{r}
+# Rdscore vs Sdscore
+
+d6 %>% 
+  filter(Rage > 65, Sage > 65) %>% 
+  ggplot(aes(Rdscore, Sdscore, color = Rage)) +
+  geom_jitter()
+
+cor(Rdscore, Sdscore)
+
+```
+
+```{r}
+#mean age trend
+
+Ravgscore <- c()
+
+for(i in c(0:35)) {
+  d7R <- filter(d6, Rage == i + 65)
+  Ravgscore <- append(Ravgscore, mean(d7R$Rdscore))
+}
+
+age <- c(65:100)
+
+Scoredata <- data.frame(age, Ravgscore)
+
+ggplot(Scoredata, aes(age, Ravgscore)) + 
+  geom_smooth()
+# I HAVE HAD A REVELATION
+# DEMENTIA BECOMES MORE LIKELY WITH AGE
+# much wow
+
+
+
+```
+
+```{r}
+# dementia vs not (defined by 2+ signs)
+
+ggplot(d6, aes(Reduc, Rdwtr)) +
+  geom_count()
+
+
+ggplot(d6, aes(Reduc, Rdscore)) +
+  geom_count()
+
+#OOH percentages? normalization!! let's start with just dementia vs not
+# I feel like there's an easier way to do this
+```
+
+
+```{r}
+Rd_rat_ed <- c()
+
+
+for(i in c(1:7)) {
+  d8R <- filter(d6, Reduc == i, Rage > 64)
+  Rd_rat_ed <- append(Rd_rat_ed, sum(d8R$Rdwtr) / length(d8R$Reduc))
+}
+
+#Rd_rat_ed
+Educ <- c(1:7)
+
+rat_ed <- data.frame(Educ, Rd_rat_ed)
+
+ggplot(rat_ed, aes(Educ, Rd_rat_ed)) + geom_point()
+
+#WOOT
+# graph of the percentage of people in each education bracket who have 2+ signs of dementia
+
+```
+
+```{r}
+# CHECK WITH SPOUSE DATA
+
+Sdwtr <- ifelse(Sdscore > 1, 1, 0)
+d6 <- mutate(d6, Sdwtr = Sdwtr)
+
+Sd_rat_ed <- c()
+
+
+for(i in c(1:7)) {
+  d8S <- filter(d6, Seduc == i, Sage > 64)
+  Sd_rat_ed <- append(Sd_rat_ed, sum(d8S$Sdwtr) / length(d8S$Seduc))
+}
+
+
+Seduc <- c(1:7)
+
+rat_ed <- data.frame(Seduc, Sd_rat_ed)
+
+ggplot(rat_ed, aes(Seduc, Sd_rat_ed)) + geom_point()
+
+#THAT WORKED IN ONE GO
+#!!!
+#what's up with 2
+
+```
+
+```{r}
+#really need to combine R and S at some point... 
+#sigh
+
+ggplot(d6, aes(Seduc, Sage)) + geom_jitter()
+#oh. that's what's up with 2. remember to limit your ages!
+
+
+ggplot(rat_ed, aes(Rd_rat_ed, Sd_rat_ed)) + geom_jitter() # what does this do?? it was in final but I don't understand it anymore
+
+```
+So we have pattern #1 (now fixed!)! 
+
+
+```{r}
+#random thought
+ggplot(rat_ed, aes(Rd_rat_ed, Sd_rat_ed)) + geom_jitter()
+#oh wait that just shows if the pattern holds against both which it obviously does
+
+#I want to look at Rdscore vs Sdscore in a more nuanced way
+#not sure it's actually normalizable though...? 
+
+```
+
+
+```{r}
+d6
+```
+
+```{r}
+ggplot(d6, aes(Rinteraction, Rdwtr)) + geom_count()
+```
+
+```{r}
+Sd_rat_int <- c()
+
+
+for(i in c(1:5)) {
+  d8S <- filter(d6, Sinteraction == i, Sage > 64)
+  Sd_rat_int <- append(Sd_rat_int, sum(d8S$Sdwtr) / length(d8S$Sinteraction))
+}
+
+
+Sint <- c(1:5)
+
+rat_int <- data.frame(Sint, Sd_rat_int)
+
+ggplot(rat_int, aes(Sint, Sd_rat_int)) + geom_point()
+```
+
+```{r}
+Sd_rat_tp <- c()
+
+
+for(i in c(1:5)) {
+  d8S <- filter(d6, Stimepressure == i, Sage > 64)
+  Sd_rat_tp <- append(Sd_rat_tp, sum(d8S$Sdwtr) / length(d8S$Stimepressure))
+}
+
+
+Stp <- c(1:5)
+
+tp <- data.frame(Stp, Sd_rat_tp)
+
+ggplot(tp, aes(Stp, Sd_rat_tp)) + geom_point()
+```
+
+```{r}
+d6 %>% 
+  filter(Stimepressure > 0 & Stimepressure < 6) %>% 
+  ggplot(aes(Stimepressure, Sdwtr)) + geom_jitter()
+```
+```{r}
+Rd_rat_ma <- c()
+
+
+for(i in c(1:5)) {
+  d8R <- filter(d6, Rmental_activity == i, Rage > 64)
+  Rd_rat_ma <- append(Rd_rat_ma, sum(d8R$Rdwtr) / length(d8R$Rmental_activity))
+}
+
+
+Rma <- c(1:5)
+
+rat_ma <- data.frame(Rma, Rd_rat_ma)
+
+ggplot(rat_ma, aes(Rma, Rd_rat_ma)) + geom_point()
+
+d6 %>% 
+  filter(Rmental_activity > 0, Rmental_activity < 6) %>% 
+  ggplot(aes(Rmental_activity, Rdscore)) + geom_jitter()
+
+```
+
+
+```{r}
+attach(d6)
+Rrel2 <- ifelse(Rrelig == 8, 3, ifelse(Rrelig == 10, 4, ifelse(Rrelig == 13, 5, Rrelig)))
+
+
+d6 %>% 
+  mutate(Rrel2 = Rrel2) %>% 
+  filter(Rrel2 < 40) %>% 
+  ggplot(aes(Rrel2, Rdscore)) + geom_jitter()
+detach(d6)
+```
+
+
+
+```{r}
+#names(d6)
+
+# want: df that stacks R on top of S
+
+dR <- select(d6, -c(Isex, Sretiredwhen, Sage, Ssex, Shrs_personal, Shrs_leisure, Shrs_volunteer, Sinteraction, Smental_activity, Stimepressure, Shealth_general, Swtr_memloss, Sage_memloss, Smeds_memloss, S65plus, Swtr_hospital, S_hosp_nights, S_hosp_weeks, Syr_uni, Smajor_1, Smajor_2, Syr_unigrad, Srelig, Sdenom, Srelig_svc_num, Srelig_svc_per, Seduc, Sdscore, Sdwtr), Rsex) # for some reason Rsex didn't select automatically, which  is why it's added at the end
+
+#names(dR)
+
+dS <- select(d6, FID68, PID68, FID17, PID17, state, wtr_medical_bills, medical_bills, Fwtr_HI, Fwtr_noHI, exp_hosp_nursing, exp_presc_etc, Fmedbills_amt, Fmedbills_wtr, exp_healthbills, Fexp_hosp_nurs, Fexp_presc_etc, Fexp_HI, region, weight, FID17_, seqnum, relation, wtr_R, F_wtr_HI, Isex, 
+             retiredwhen = Sretiredwhen,
+             age = Sage, 
+             sex = Ssex, 
+             hrs_personal = Shrs_personal, 
+             hrs_leisure = Shrs_leisure, 
+             hrs_volunteer = Shrs_volunteer, 
+             interaction = Sinteraction, 
+             mental_activity = Smental_activity, 
+             timepressure = Stimepressure, 
+             health_general = Shealth_general, 
+             wtr_memloss = Swtr_memloss, 
+             age_memloss = Sage_memloss, 
+             meds_memloss = Smeds_memloss, 
+             if65 = S65plus, 
+             wtr_hospital = Swtr_hospital, 
+             hosp_nights = S_hosp_nights, 
+             hosp_weeks = S_hosp_weeks, 
+             yr_uni = Syr_uni, 
+             major_1 = Smajor_1, 
+             major_2 = Smajor_2, 
+             yr_unigrad = Syr_unigrad, 
+             relig = Srelig, 
+             denom = Sdenom, 
+             relig_svc_num = Srelig_svc_num, 
+             relig_svc_per = Srelig_svc_per, 
+             educ = Seduc, 
+             dscore = Sdscore, 
+             dwtr = Sdwtr)
+
+#dcom <- full_join(dR, dS)
+#no. 
+
+dR
+
+dR <- rename(dR, retiredwhen = Rretiredwhen, 
+             age = Rage, 
+             sex = Rsex, 
+             hrs_personal = Rhrs_personal, 
+             hrs_leisure = Rhrs_leisure, 
+             hrs_volunteer = Rhrs_volunteer, 
+             interaction = Rinteraction, 
+             mental_activity = Rmental_activity, 
+             timepressure = Rtimepressure, 
+             health_general = Rhealth_general, 
+             wtr_memloss = Rwtr_memloss, 
+             age_memloss = Rage_memloss, 
+             meds_memloss = Rmeds_memloss, 
+             if65 = R65plus, 
+             wtr_hospital = Rwtr_hospital, 
+             hosp_nights = R_hosp_nights, 
+             hosp_weeks = R_hosp_weeks, 
+             yr_uni = Ryr_uni, 
+             major_1 = Rmajor_1, 
+             major_2 = Rmajor_2, 
+             yr_unigrad = Ryr_unigrad, 
+             relig = Rrelig, 
+             denom = Rdenom, 
+             relig_svc_num = Rrelig_svc_num, 
+             relig_svc_per = Rrelig_svc_per, 
+             educ = Reduc, 
+             dscore = Rdscore, 
+             dwtr = Rdwtr)
+
+dcom <- full_join(dR, dS)
+dcom
+
+
+
+
+```
+
+```{r}
+
+dcom  %>% 
+  filter(sex > 0, dscore > 0, age > 64) %>% 
+  ggplot(aes(sex, dscore)) + 
+  geom_jitter() +
+  stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4, fill = "red")
+
+
+dim(filter(dcom, sex == 1, dscore == 0, age > 64)) / dim(filter(dcom, sex == 1, age > 64))
+
+dim(filter(dcom, sex == 2, dscore == 0, age > 64)) / dim(filter(dcom, sex == 2, age > 64))
+# doesn't seem super statistically significant - probably no or little variance across sex - even less so when you add in age
+```
+
+
+```{r}
+
+#ggplot(dcom, aes(life_satisf, dwtr)) + geom_jitter()
+#ggplot(dcom, aes(life_satisf, dscore)) + geom_jitter()
+
+
+dvsLs <- c()
+
+
+for(i in c(1:5)) {
+  dcom1 <- filter(dcom, life_satisf == i, age > 64)
+  dvsLs <- append(dvsLs, sum(dcom1$dwtr) / length(dcom1$life_satisf))
+}
+
+
+ls <- c(1:5)
+
+rat_ls <- data.frame(ls, dvsLs)
+
+ggplot(rat_ls, aes(ls, dvsLs)) + geom_point()
+
+dcom %>% 
+  filter(life_satisf > 0, life_satisf < 6) %>% 
+  ggplot(aes(life_satisf, dscore)) + geom_jitter()
+
+#NOTE: 1 is MOST satisfied. 5 is least. Result makes much more sense that way. 
+
+
+
+```
+
+```{r}
+dcom %>% 
+  filter(life_satisf > 0, life_satisf < 6, age > 64) %>% 
+  ggplot(aes(age, life_satisf)) + geom_jitter()
+```
+
+
+
+
+```{r}
+
+dcom %>% 
+  filter(age > 64, wtr_memloss < 6) %>%
+  ggplot(aes(wtr_memloss, dscore)) + geom_jitter()
+
+```
+
+```{r}
+dcom 
+```
+
+```{r}
+dcom %>% 
+  filter(age > 64, wtr_medical_bills < 6) %>%
+  ggplot(aes(wtr_medical_bills, dscore)) + geom_jitter()
+# basically everyone has medical bills
+
+```
+
+```{r}
+dcom %>% 
+  filter(age > 64, medical_bills < 999,999,997, medical_bills > 1) %>%
+  ggplot(aes(medical_bills, dscore)) + geom_jitter()
+# not enough data
+
+```
+
+
+
+```{r}
+dcom %>% 
+  filter(age > 64) %>% 
+  ggplot(aes(Fwtr_HI, dscore)) + geom_jitter()
+```
+
+```{r}
+length(filter(dcom, Fwtr_HI == 5))
+# so basically no one
+
+```
+
+```{r}
+d_rat_ed <- c()
+
+
+for(i in c(1:7)) {
+  d8 <- filter(dcom, educ == i, age > 64)
+  d_rat_ed <- append(d_rat_ed, sum(d8$dwtr) / length(d8$educ))
+}
+
+#Rd_rat_ed
+Educ <- c(1:7)
+
+rat_ed <- data.frame(Educ, d_rat_ed)
+
+ggplot(rat_ed, aes(Educ, d_rat_ed)) + geom_point()
+```
+
+```{r}
+dcom
+```
+
+
+```{r}
+d_rat_int <- c()
+
+
+for(i in c(1:5)) {
+  d8 <- filter(dcom, interaction == i, age > 64)
+  d_rat_int <- append(d_rat_int, sum(d8$dwtr) / length(d8$interaction))
+}
+
+
+int <- c(1:5)
+
+rat_int <- data.frame(int, d_rat_int)
+
+ggplot(rat_int, aes(int, d_rat_int)) + geom_point()
+```
+
+
+
+```{r}
+d_rat_tp <- c()
+
+
+for(i in c(1:5)) {
+  d8 <- filter(dcom, timepressure == i, age > 64)
+  d_rat_tp <- append(d_rat_tp, sum(d8$dwtr) / length(d8$timepressure))
+}
+
+
+tp <- c(1:5)
+
+rat_tp <- data.frame(tp, d_rat_tp)
+
+ggplot(rat_tp, aes(tp, d_rat_tp)) + geom_point()
+```
+
+
+```{r}
+d_rat_hp <- c()
+
+
+for(i in c(1:20)) {
+  d8 <- filter(dcom, hrs_personal == i, age > 64)
+  d_rat_hp <- append(d_rat_hp, sum(d8$dwtr) / length(d8$hrs_personal))
+}
+
+
+hp <- c(1:20)
+
+rat_hp <- data.frame(hp, d_rat_hp)
+
+ggplot(rat_hp, aes(hp, d_rat_hp)) + geom_point()
+
+dcom %>% 
+  filter(hrs_personal < 250, age > 64) %>% 
+  ggplot(aes(hrs_personal, dscore)) + geom_jitter()
+```
+
+```{r}
+d_rat_hv <- c()
+
+
+for(i in c(1:30)) {
+  d8 <- filter(dcom, hrs_volunteer == i, age > 64)
+  d_rat_hv <- append(d_rat_hv, sum(d8$dwtr) / length(d8$hrs_volunteer))
+}
+
+
+hv <- c(1:30)
+
+rat_hv <- data.frame(hv, d_rat_hv)
+
+ggplot(rat_hv, aes(hv, d_rat_hv)) + geom_point()
+
+dcom %>% 
+  filter(hrs_volunteer < 250, age > 64) %>% 
+  ggplot(aes(hrs_volunteer, dscore)) + geom_jitter()
+
+```
+
+```{r}
+d_rat_hl <- c()
+
+
+for(i in c(1:40)) {
+  d8 <- filter(dcom, hrs_leisure == i, age > 64)
+  d_rat_hl <- append(d_rat_hl, sum(d8$dwtr) / length(d8$hrs_leisure))
+}
+
+
+hl <- c(1:40)
+
+rat_hl <- data.frame(hl, d_rat_hl)
+
+ggplot(rat_hl, aes(hl, d_rat_hl)) + geom_point()
+
+dcom %>% 
+  filter(hrs_leisure < 250, age > 64) %>% 
+  ggplot(aes(hrs_leisure, dscore)) + geom_jitter()
+```
+
+
+```{r}
+d_rat_ma <- c()
+
+
+for(i in c(1:5)) {
+  d8 <- filter(dcom, mental_activity == i, age > 64)
+  d_rat_ma <- append(d_rat_ma, sum(d8$dwtr) / length(d8$mental_activity))
+}
+
+
+ma <- c(1:5)
+
+rat_ma <- data.frame(ma, d_rat_ma)
+
+ggplot(rat_ma, aes(ma, d_rat_ma)) + geom_point()
+
+dcom %>% 
+  filter(mental_activity < 6, age > 64) %>% 
+  ggplot(aes(mental_activity, dscore)) + geom_jitter()
+```
+
+
+```{r}
+d_rat_tp <- c()
+
+
+for(i in c(1:5)) {
+  d8 <- filter(dcom, timepressure == i, age > 64)
+  d_rat_tp <- append(d_rat_tp, sum(d8$dwtr) / length(d8$timepressure))
+}
+
+
+tp <- c(1:5)
+
+rat_tp <- data.frame(tp, d_rat_tp)
+
+ggplot(rat_tp, aes(tp, d_rat_tp)) + geom_point()
+
+dcom1 %>% 
+  filter(timepressure < 6, age > 64) %>% 
+  ggplot(aes(timepressure, dscore)) + geom_jitter()
+```
+
+
+```{r}
+d_rat_m1 <- c()
+
+
+for(i in c(1:140)) {
+  d8 <- filter(dcom, major_1 == i, age > 64)
+  d_rat_m1 <- append(d_rat_m1, sum(d8$dwtr) / length(d8$major_1))
+}
+
+
+m1 <- c(1:140)
+
+rat_m1 <- data.frame(m1, d_rat_m1)
+
+ggplot(rat_m1, aes(m1, d_rat_m1)) + geom_point()
+
+dcom %>% 
+  filter(major_1 < 140 & major_1 > 0, age > 64) %>% 
+  ggplot(aes(major_1, dscore)) + geom_jitter()
+```
+
+
+```{r}
+d_rat_denom <- c()
+
+
+for(i in c(0:30)) {
+  d8 <- filter(dcom, denom == i, age > 64)
+  d_rat_denom <- append(d_rat_denom, sum(d8$dwtr) / length(d8$denom))
+}
+
+
+denom <- c(0:30)
+
+rat_denom <- data.frame(denom, d_rat_denom)
+
+ggplot(rat_denom, aes(denom, d_rat_denom)) + geom_point()
+
+dcom %>% 
+  filter(denom < 30, age > 64) %>% 
+  ggplot(aes(denom, dscore)) + geom_jitter()
+```
+
+```{r}
+d_rat_svp <- c()
+
+
+for(i in c(0,3,5,6,9)) {
+  d8 <- filter(dcom, relig_svc_per == i, age > 64)
+  d_rat_svp <- append(d_rat_svp, sum(d8$dwtr) / length(d8$relig_svc_per))
+}
+
+
+svp <- c(0,3,5,6,9)
+
+rat_svp <- data.frame(svp, d_rat_svp)
+
+ggplot(rat_svp, aes(svp, d_rat_svp)) + geom_point()
+
+dcom %>% 
+  filter(relig_svc_per < 250, age > 64) %>% 
+  ggplot(aes(relig_svc_per, dscore)) + geom_jitter()
+```
+
+```{r}
+f_rat_reg <- c()
+m_rat_reg <- c()
+
+
+for(i in c(1:4)) {
+  dM <- filter(dcom, region == i, age > 64, sex == 1)
+  dF <- filter(dcom, region == i, age > 64, sex == 2)
+  f_rat_reg <- append(f_rat_reg, sum(dF$dwtr) / length(dF$region))
+  m_rat_reg <- append(m_rat_reg, sum(dM$dwtr) / length(dM$region))
+}
+
+
+reg <- c(1:4)
+
+
+mrat_reg <- data.frame(reg, rat_reg = m_rat_reg, G = 1)
+frat_reg <- data.frame(reg, rat_reg = f_rat_reg, G = 2)
+#mrat_reg <- mutate(mrat_reg, rat_reg = m_rat_reg, G = 1)
+#frat_reg <- mutate(frat_reg, rat_reg = f_rat_reg, G = 2)
+drat <- full_join(mrat_reg, frat_reg)
+#drat <- select(drat, -m_rat_reg, -f_rat_reg)
+drat
+
+ggplot(drat, aes(reg, rat_reg, color = G)) + geom_point(size = 3)
+
+dcom1 %>% 
+  filter(region < 5, age > 64) %>% 
+  ggplot(aes(region, dscore)) + geom_jitter()
+
+
+```
+
+```{r}
+d6
+```
+
+
+```{r}
+ggplot(d6, aes(Rsex, Ssex)) + geom_jitter()
+```
+
+```{r}
+f_rat_svp <- c()
+m_rat_svp <- c()
+
+
+for(i in c(0,3,5,6)) {
+  dM <- filter(dcom, relig_svc_per == i, age > 64, sex == 1)
+  dF <- filter(dcom, relig_svc_per == i, age > 64, sex == 2)
+  f_rat_svp <- append(f_rat_svp, sum(dF$dwtr) / length(dF$relig_svc_per))
+  m_rat_svp <- append(m_rat_svp, sum(dM$dwtr) / length(dM$relig_svc_per))
+}
+
+
+svp <- c(0,3,5,6)
+
+
+mrat_svp <- data.frame(svp, rat_svp = m_rat_svp, G = 1)
+frat_svp <- data.frame(svp, rat_svp = f_rat_svp, G = 2)
+#mrat_reg <- mutate(mrat_reg, rat_reg = m_rat_reg, G = 1)
+#frat_reg <- mutate(frat_reg, rat_reg = f_rat_reg, G = 2)
+dsvp <- full_join(mrat_svp, frat_svp)
+#drat <- select(drat, -m_rat_reg, -f_rat_reg)
+dsvp
+
+ggplot(dsvp, aes(svp, rat_svp, color = G)) + geom_point(size = 3, rm.na = TRUE)
+
+dcom %>% 
+  filter(relig_svc_per < 10, age > 64) %>% 
+  ggplot(aes(relig_svc_per, dscore)) + geom_jitter()
+```
+
+
+
+
+```{r}
+dQ <- c()
+fQ <- c()
+mQ <- c()
+Q <- c(1:Z)
+
+for(i in c(1:Z)) {
+  d6 <- filter(dcom1, Y == i, age > 64)
+  dM <- filter(dcom1, Y == i, age > 64, sex == 1)
+  dF <- filter(dcom1, Y == i, age > 64, sex == 2)
+  dQ <- append(dQ, sum(d6$dwtr) / length(d6$Y))
+  fQ <- append(fQ, sum(dF$dwtr) / length(dF$Y))
+  mQ <- append(mQ, sum(dM$dwtr) / length(dM$Y))
+}
+
+
+dQ_dat <- data.frame(Q, aQ = dQ, G = "A")
+mQ_dat <- data.frame(Q, aQ = mQ, G = "M")
+fQ_dat <- data.frame(Q, aQ = fQ, G = "F")
+Q_dat <- full_join(mQ_dat, full_join(fQ_dat, dQ_dat))
+Q_dat$G <- as.factor(Q_dat$G)
+
+
+ggplot(dQ_dat, aes(Q, aQ)) + geom_point()
+ggplot(Q_dat, aes(Q, aQ, color = G)) + geom_point(size = 2)
+
+dcom1 %>% 
+  filter(Y < Z, age > 64) %>% 
+  ggplot(aes(Y, dscore)) + geom_jitter()
+```
+
+
+```{r}
+dhp <- c()
+fhp <- c()
+mhp <- c()
+hp <- c(1:5)
+
+for(i in c(1:5)) {
+  d6 <- filter(dcom1, hrs_personal < i*4, hrs_personal >= (i-1)*4, age > 64)
+#  dM <- filter(dcom1, hrs_personal == i, age > 64, sex == 1)
+#  dF <- filter(dcom1, hrs_personal == i, age > 64, sex == 2)
+  dhp <- append(dhp, sum(d6$dwtr) / length(d6$hrs_personal))
+#  fhp <- append(fhp, sum(dF$dwtr) / length(dF$hrs_personal))
+#  mhp <- append(mhp, sum(dM$dwtr) / length(dM$hrs_personal))
+}
+
+
+dhp_dat <- data.frame(hp, ahp = dhp, G = "A")
+#mhp_dat <- data.frame(hp, ahp = mhp, G = "M")
+#fhp_dat <- data.frame(hp, ahp = fhp, G = "F")
+#hp_dat <- full_join(mhp_dat, full_join(fhp_dat, dhp_dat))
+#hp_dat$G <- as.factor(hp_dat$G)
+
+
+ggplot(dhp_dat, aes(hp, ahp)) + geom_point() + y_scale
+ggplot(dhp_dat, aes(hp, ahp)) + geom_col() + y_scale
+#ggplot(hp_dat, aes(hp, ahp, color = G)) + geom_point(size = 2) + geom_smooth(se = FALSE, method = "lm") + y_scale
+
+dcom1 %>% 
+  filter(hrs_personal < 20, age > 64) %>% 
+  ggplot(aes(hrs_personal, dscore)) + geom_jitter()
+
+cor(dhp_dat$hp, dhp_dat$ahp)
+
+```
+
+
+```{r}
+dhl <- c()
+fhl <- c()
+mhl <- c()
+hl <- c(1:13)
+
+for(i in c(1:13)) {
+  d6 <- filter(dcom1, hrs_leisure < i*5, hrs_leisure > (i-1)*5, age > 64)
+  #dM <- filter(dcom1, hrs_leisure == i, age > 64, sex == 1)
+  #dF <- filter(dcom1, hrs_leisure == i, age > 64, sex == 2)
+  dhl <- append(dhl, sum(d6$dwtr) / length(d6$hrs_leisure))
+  #fhl <- append(fhl, sum(dF$dwtr) / length(dF$hrs_leisure))
+  #mhl <- append(mhl, sum(dM$dwtr) / length(dM$hrs_leisure))
+}
+
+
+dhl_dat <- data.frame(hl, ahl = dhl, G = "A")
+#mhl_dat <- data.frame(hl, ahl = mhl, G = "M")
+#fhl_dat <- data.frame(hl, ahl = fhl, G = "F")
+#hl_dat <- full_join(mhl_dat, full_join(fhl_dat, dhl_dat))
+#hl_dat$G <- as.factor(hl_dat$G)
+
+
+ggplot(dhl_dat, aes(hl, ahl)) + geom_point() + geom_smooth(se = F) #+ y_scale
+ggplot(dhl_dat, aes(hl, ahl)) + geom_col() #+ y_scale
+#ggplot(hl_dat, aes(hl, ahl, color = G)) + geom_point(size = 2) + y_scale
+
+dcom1 %>% 
+  filter(hrs_leisure < 65, age > 64) %>% 
+  ggplot(aes(hrs_leisure, dscore)) + geom_jitter()
+
+```
+
+
+
+
+Whether Hospitalized
+```{r}
+
+dwh <- c()
+fwh <- c()
+mwh <- c()
+wh <- c(1,5)
+
+for(i in c(1,5)) {
+  d6 <- filter(dcom1, wtr_hospital == i, age > 64)
+  dM <- filter(dcom1, wtr_hospital == i, age > 64, sex == 1)
+  dF <- filter(dcom1, wtr_hospital == i, age > 64, sex == 2)
+  dwh <- append(dwh, sum(d6$dwtr) / length(d6$wtr_hospital))
+  fwh <- append(fwh, sum(dF$dwtr) / length(dF$wtr_hospital))
+  mwh <- append(mwh, sum(dM$dwtr) / length(dM$wtr_hospital))
+}
+
+
+dwh_dat <- data.frame(wh, awh = dwh, G = "A")
+mwh_dat <- data.frame(wh, awh = mwh, G = "M")
+fwh_dat <- data.frame(wh, awh = fwh, G = "F")
+wh_dat <- full_join(mwh_dat, full_join(fwh_dat, dwh_dat))
+wh_dat$G <- as.factor(wh_dat$G)
+
+
+ggplot(dwh_dat, aes(wh, awh)) + geom_point() + y_scale
+ggplot(wh_dat, aes(wh, awh, color = G)) + geom_point(size = 2) + y_scale
+
+dcom1 %>% 
+  filter(wtr_hospital < 6, age > 64) %>% 
+  ggplot(aes(wtr_hospital, dscore)) + geom_jitter()
+
+
+
+dcom1 %>% 
+  filter(age > 64, wtr_hospital < 6) %>% 
+  ggplot(aes(wtr_hospital, dwtr)) + geom_jitter()
+```
+
+Prescription & Other Expenses
+```{r}
+dexp <- c()
+fexp <- c()
+mexp <- c()
+exp <- c(1:10)
+
+for(i in c(1:10)) {
+  d6 <- filter(dcom1, exp_presc_etc <= i*1000, exp_presc_etc > (i - 1)*1000, age > 64)
+  dexp <- append(dexp, sum(d6$dwtr) / length(d6$exp_presc_etc))
+}
+
+
+dexp_dat <- data.frame(exp, aexp = dexp, G = "A")
+
+
+ggplot(dexp_dat, aes(exp, aexp)) + geom_point()
+
+ggplot(dexp_dat, aes(exp, aexp)) + geom_col()
+#ggplot(exp_dat, aes(exp, aexp, color = G)) + geom_point(size = 2)
+
+dcom1 %>% 
+  filter(exp_presc_etc < 10000, age > 64) %>% 
+  ggplot(aes(exp_presc_etc, dwtr)) + geom_jitter()
+```
+
+Hospital & Nursing Expenses
+```{r}
+dehn <- c()
+fehn <- c()
+mehn <- c()
+ehn <- c(1:10)
+
+for(i in c(1:10)) {
+  d6 <- filter(dcom1, 
+               exp_hosp_nursing <= i*1000, 
+               exp_hosp_nursing > (i - 1)*1000, 
+               age > 64,
+               wtr_hospital == 5)
+  dehn <- append(dehn, sum(d6$dwtr) / length(d6$exp_hosp_nursing))
+}
+
+
+dehn_dat <- data.frame(ehn, aehn = dehn, G = "A")
+
+
+ggplot(dehn_dat, aes(ehn, aehn)) + geom_point() + y_scale
+
+ggplot(dehn_dat, aes(ehn, aehn)) + geom_col() + y_scale
+#ggplot(ehn_dat, aes(ehn, aehn, color = G)) + geom_point(size = 2)
+
+dcom1 %>% 
+  filter(exp_hosp_nursing < 10000, age > 64) %>% 
+  ggplot(aes(exp_hosp_nursing, dwtr)) + geom_jitter()
+```
+
+Whether Employed
+```{r}
+demp <- c()
+femp <- c()
+memp <- c()
+emp <- c(1:6)
+
+for(i in c(1:6)) {
+  d6 <- filter(dcom1, Remploy == i, age > 64)
+  dM <- filter(dcom1, Remploy == i, age > 64, sex == 1)
+  dF <- filter(dcom1, Remploy == i, age > 64, sex == 2)
+  demp <- append(demp, sum(d6$dwtr) / length(d6$Remploy))
+  femp <- append(femp, sum(dF$dwtr) / length(dF$Remploy))
+  memp <- append(memp, sum(dM$dwtr) / length(dM$Remploy))
+}
+
+
+demp_dat <- data.frame(emp, aemp = demp, G = "A")
+memp_dat <- data.frame(emp, aemp = memp, G = "M")
+femp_dat <- data.frame(emp, aemp = femp, G = "F")
+emp_dat <- full_join(memp_dat, full_join(femp_dat, demp_dat))
+emp_dat$G <- as.factor(emp_dat$G)
+
+
+ggplot(demp_dat, aes(emp, aemp)) + geom_point() + y_scale
+ggplot(emp_dat, aes(emp, aemp, color = G)) + geom_point(size = 2) + y_scale
+
+dcom1 %>% 
+  filter(Remploy < 9, age > 64) %>% 
+  ggplot(aes(Remploy, dscore)) + geom_jitter()
+```
+
+STUFF COPIED OVER FROM FINAL WHEN I REALIZED I COULD DO THIS SO MUCH MORE SIMPLY
+(whyyy)
+
+```{r}
+educ <- ifelse(dcom$highest_degree > 3, 7, ifelse(dcom$highest_degree == 3, 6, ifelse(dcom$highest_degree == 2, 5, ifelse(dcom$highest_degree == 1, 4, ifelse(dcom$wtr_uni == 1, 3, ifelse(dcom$wtr_hsgrad < 3, 2, 1))))))
+
+dscore <- ifelse(dcom$c_decisions == 1, 1, 0) + 
+  ifelse(dcom$c_interest == 1, 1, 0) + 
+  ifelse(dcom$c_story_repeats == 1, 1, 0) + 
+  ifelse(dcom$c_learning == 1, 1, 0) + 
+  ifelse(dcom$c_datemem == 1, 1, 0) + 
+  ifelse(dcom$c_money == 1, 1, 0) + 
+  ifelse(dcom$c_apptmem == 1, 1, 0) + 
+  ifelse(dcom$c_memory == 1, 1, 0)
+
+
+dcom1 <- dcom %>% 
+  select(-c(c_interest, c_story_repeats, c_learning, c_datemem, c_money, c_apptmem, c_memory, c_decisions)) %>%
+  select(-c(wtr_hsgrad, ged_grade, hs_grade, wtr_uni, uni_grade, wtr_unigrad, highest_degree)) %>% 
+  mutate(dscore = dscore, educ = educ)
+
+dwtr <- ifelse(dscore > 1, 1, 0)
+dcom1 <- mutate(dcom1, dwtr = dwtr)
+
+
+```
+
+
+```{r}
+dcom1$sex <- as.factor(dcom1$sex)
+
+dcom1  %>% 
+  filter(sex != 0, dscore > 0, age > 64) %>% 
+  ggplot(aes(sex, dscore)) + 
+  geom_jitter() +
+  stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4, fill = "red") +
+  labs(x = "Sex", y = "Dementia Score", title = "Dementia Comparison across Sex") +
+  scale_x_discrete(labels = c("Male", "Female"))
+
+
+dim(filter(dcom1, sex == 1, dwtr == 0, age > 64)) / dim(filter(dcom1, sex == 1, age > 64))
+
+dim(filter(dcom1, sex == 2, dwtr == 0, age > 64)) / dim(filter(dcom1, sex == 2, age > 64))
+#dcom1$sex <- as.integer(dcom1$sex)
+dcom1$sex
+```
+
+b. Dementia vs Age
+```{r}
+avgscore1 <- c()
+
+for(i in c(0:25)) {
+  d4 <- filter(dcom1, age == i + 65)
+  avg1 <- sum(d4$dwtr) / length(d4$dwtr)
+  avgscore1 <- append(avgscore1, avg1)
+}
+
+
+Scoredata <- data.frame(age, avgscore1)
+
+ggplot(Scoredata, aes(age, avgscore1)) + 
+  geom_smooth() + geom_point() +
+  labs(x = "Age", y = "% with Dementia", title = "Correlation between Age and Dementia")
+
+dcom1 %>% 
+  filter(age > 65) %>% 
+  ggplot(aes(age, dscore)) + geom_jitter() +
+  labs(x = "Age", y = "Dementia Score", title = "Visualization of Dementia Score vs Age")
+
+cor(Scoredata$age, Scoredata$avgscore1)
+```
+
+
+c. D vs Region (label axis scale!)
+```{r}
+f_rat_reg <- c()
+m_rat_reg <- c()
+all_rat_reg <- c()
+
+dcom1$region <- as.integer(dcom1$region)
+
+for(i in c(1:4)) {
+  dM <- filter(dcom1, region == i, age > 64, sex == 1)
+  dF <- filter(dcom1, region == i, age > 64, sex == 2)
+  d14 <- filter(dcom1, region == i, age > 64, sex != 0)
+  f_rat_reg <- append(f_rat_reg, sum(dF$dwtr) / length(dF$region))
+  m_rat_reg <- append(m_rat_reg, sum(dM$dwtr) / length(dM$region))
+  all_rat_reg <- append(all_rat_reg, sum(d14$dwtr) / length(d14$region))
+}
+
+
+reg <- c(1:4)
+
+
+mrat_reg <- data.frame(reg, rat_reg = m_rat_reg, G = "M")
+frat_reg <- data.frame(reg, rat_reg = f_rat_reg, G = "F")
+allreg <- data.frame(reg, rat_reg = all_rat_reg, G = "A")
+grat <- full_join(mrat_reg, frat_reg)
+drat <- full_join(grat, allreg)
+drat$G <- as.factor(drat$G)
+
+ggplot(drat, aes(reg, rat_reg, color = G)) + geom_point(size = 2) + y_scale +
+  scale_x_continuous(labels = c("Northeast",  "North Central", "South", "West"))+
+  labs(x = "Region", y = "% with Dementia", title = "Dementia Rate by Region and Sex")
+
+ggplot(allreg, aes(reg, rat_reg)) + 
+  geom_point(size = 3) + y_scale +
+  scale_x_continuous(labels = c("Northeast",  "North Central", "South", "West")) +
+  labs(x = "Region", y = "% with Dementia", title = "Dementia Rate by Region")
+
+dcom1 %>% 
+  filter(region < 5, age > 64) %>% 
+  ggplot(aes(region, dscore)) + geom_jitter() +
+  scale_x_continuous(labels = c("Northeast",  "North Central", "South", "West"), breaks = c(1:4))+
+  labs(x = "Region", y = "Dementia Score", title = "Dementia Score by Region")
+
+dcom1 %>% 
+  filter(age > 64) %>% 
+  group_by(region) %>% 
+  summarize(n(), mean(dwtr))
+
+```
+
+
+
+d. D vs Education (axis scale)
+```{r}
+f_rat_ed <- c()
+m_rat_ed <- c()
+all_rat_ed <- c()
+
+
+for(i in c(1:7)) {
+  dM <- filter(dcom1, educ == i, age > 64, sex == 1)
+  dF <- filter(dcom1, educ == i, age > 64, sex == 2)
+  d14 <- filter(dcom1, educ == i, age > 64, sex != 0)
+  f_rat_ed <- append(f_rat_ed, sum(dF$dwtr) / length(dF$educ))
+  m_rat_ed <- append(m_rat_ed, sum(dM$dwtr) / length(dM$educ))
+  all_rat_ed <- append(all_rat_ed, sum(d14$dwtr) / length(d14$educ))
+}
+
+
+ed <- c(1:7)
+
+
+med_dat <- data.frame(ed, rat_ed = m_rat_ed, G = "M")
+fed_dat <- data.frame(ed, rat_ed = f_rat_ed, G = "F")
+ded_dat <- data.frame(ed, rat_ed = all_rat_ed, G = "A")
+ed_dat <- full_join(med_dat, fed_dat)
+ed_dat <- full_join(ed_dat, ded_dat)
+ed_dat$G <- as.factor(ed_dat$G)
+
+ggplot(ed_dat, aes(ed, rat_ed, color = G)) + geom_point(size = 2) + y_scale +
+  scale_x_continuous(labels = c("Some HS", "HS Grad", "Some College", "Associate's", "Bachelor", "MA", "PhD"), breaks = ed) +
+  labs(x = "Education Level", y = "% Dementia", title = "Dementia Rate across Education by Sex")
+
+ggplot(ded_dat, aes(ed, rat_ed)) + 
+  geom_point(size = 3) + y_scale+
+  scale_x_continuous(labels = c("Some HS", "HS Grad", "Some College", "Associate's", "Bachelor", "MA", "PhD"), breaks = ed) +
+  labs(x = "Education Level", y = "% Dementia", title = "Dementia Rate across Education")
+
+dcom1 %>% 
+  filter(educ < 8, age > 64) %>% 
+  ggplot(aes(educ, dscore)) + geom_jitter()+
+  scale_x_continuous(labels = c("Some HS", "HS Grad", "Some College", "Associate's", "Bachelor", "MA", "PhD"), breaks = ed) +
+  labs(x = "Education Level", y = "Dementia Score", title = "Dementia Scores across Education")
+
+dcom1 %>% 
+  filter(age > 64, sex == 2) %>% 
+  group_by(educ) %>% 
+  summarize(n(), mean(dwtr))
+
+```
+
+
+```{r}
+dhg <- c()
+fhg <- c()
+mhg <- c()
+hg <- c(1:5)
+
+for(i in c(1:5)) {
+  d6 <- filter(dcom1, health_general == i, age > 64, sex != 0)
+  dM <- filter(dcom1, health_general == i, age > 64, sex == 1)
+  dF <- filter(dcom1, health_general == i, age > 64, sex == 2)
+  dhg <- append(dhg, sum(d6$dwtr) / length(d6$dwtr))
+  fhg <- append(fhg, sum(dF$dwtr) / length(dF$dwtr))
+  mhg <- append(mhg, sum(dM$dwtr) / length(dM$dwtr))
+}
+
+
+dhg_dat <- data.frame(hg, ahg = dhg, G = "A")
+mhg_dat <- data.frame(hg, ahg = mhg, G = "M")
+fhg_dat <- data.frame(hg, ahg = fhg, G = "F")
+hg_dat <- full_join(mhg_dat, full_join(fhg_dat, dhg_dat))
+hg_dat$G <- as.factor(hg_dat$G)
+
+
+ggplot(dhg_dat, aes(hg, ahg)) + geom_point() + geom_smooth(method = "lm", se = F) +
+  labs(x = "General Health", y = "Dementia Rate", title = "Dementia Rate over Overall Health Scores")
+ggplot(hg_dat, aes(hg, ahg, color = G)) + geom_point(size = 2) + 
+  labs(x = "General Health", y = "Dementia Rate", title = "Dementia Rate over Overall Health Scores, by Gender")
+
+dcom1 %>% 
+  filter(health_general < 6, age > 64) %>% 
+  ggplot(aes(health_general, dscore)) + geom_jitter()+ 
+  labs(x = "General Health", y = "Dementia Score", title = "Dementia Scores over Overall Health Scores")
+
+cor(hg_dat$hg, hg_dat$ahg) # This seems unreasonably high
+```
+
+```{r}
+dls <- c()
+fls <- c()
+mls <- c()
+ls <- c(5:1) # because scale is dumb and 1 is best
+
+for(i in c(1:5)) {
+  d6 <- filter(dcom1, life_satisf == i, age > 64)
+  dM <- filter(dcom1, life_satisf == i, age > 64, sex == 1)
+  dF <- filter(dcom1, life_satisf == i, age > 64, sex == 2)
+  dls <- append(dls, sum(d6$dwtr) / length(d6$life_satisf))
+  fls <- append(fls, sum(dF$dwtr) / length(dF$life_satisf))
+  mls <- append(mls, sum(dM$dwtr) / length(dM$life_satisf))
+}
+
+
+dls_dat <- data.frame(ls, als = dls, G = "A")
+mls_dat <- data.frame(ls, als = mls, G = "M")
+fls_dat <- data.frame(ls, als = fls, G = "F")
+ls_dat <- full_join(mls_dat, full_join(fls_dat, dls_dat))
+ls_dat$G <- as.factor(ls_dat$G)
+
+
+ggplot(dls_dat, aes(ls, als)) + geom_point() + y_scale +
+  labs(x = "Life Satisfaction", y = "Dementia Rate", title = "Dementia Rate over Reported Life Satisfaction")
+ggplot(ls_dat, aes(ls, als, color = G)) + geom_point(size = 2) + y_scale +
+  labs(x = "Life Satisfaction", y = "Dementia Rate", title = "Dementia Rate over Reported Life Satisfaction by Sex")
+
+dcom1 %>% 
+  filter(life_satisf < 6, age > 64) %>% 
+  ggplot(aes(life_satisf, dscore)) + geom_jitter() +
+  labs(x = "Life Satisfaction", y = "Dementia Score", title = "Dementia Score over Reported Life Satisfaction")
+
+cor(dls_dat$ls, dls_dat$als)
+```
+
+
+```{r}
+dma <- c()
+fma <- c()
+mma <- c()
+ma <- c(1:5)
+
+for(i in c(1:5)) {
+  d6 <- filter(dcom1, mental_activity == i, age > 64, sex != 0)
+  dM <- filter(dcom1, mental_activity == i, age > 64, sex == 1)
+  dF <- filter(dcom1, mental_activity == i, age > 64, sex == 2)
+  dma <- append(dma, sum(d6$dwtr) / length(d6$mental_activity))
+  fma <- append(fma, sum(dF$dwtr) / length(dF$mental_activity))
+  mma <- append(mma, sum(dM$dwtr) / length(dM$mental_activity))
+}
+
+
+dma_dat <- data.frame(ma, ama = dma, G = "A")
+mma_dat <- data.frame(ma, ama = mma, G = "M")
+fma_dat <- data.frame(ma, ama = fma, G = "F")
+ma_dat <- full_join(mma_dat, full_join(fma_dat, dma_dat))
+ma_dat$G <- as.factor(ma_dat$G)
+
+
+ggplot(dma_dat, aes(ma, ama)) + geom_point() + y_scale +
+  labs(x = "Mental Activity Rate", y = "Dementia Rate", title = "Mental Activity vs Dementia Rates")
+ggplot(ma_dat, aes(ma, ama, color = G)) + geom_point(size = 2) + y_scale+
+  labs(x = "Mental Activity Rate", y = "Dementia Rate", title = "Mental Activity vs Dementia Rates by Sex")
+
+dcom1 %>% 
+  filter(mental_activity < 6, age > 64) %>% 
+  ggplot(aes(mental_activity, dscore)) + geom_jitter()+
+  labs(x = "Mental Activity Rate", y = "Dementia Score", title = "Mental Activity vs Dementia Scores")
+
+cor(dma_dat$ma, dma_dat$ama)
+```
+
+
+```{r}
+dint <- c()
+fint <- c()
+mint <- c()
+int <- c(1:5)
+
+for(i in c(1:5)) {
+  d6 <- filter(dcom1, interaction == i, age > 64)
+  dM <- filter(dcom1, interaction == i, age > 64, sex == 1)
+  dF <- filter(dcom1, interaction == i, age > 64, sex == 2)
+  dint <- append(dint, sum(d6$dwtr) / length(d6$interaction))
+  fint <- append(fint, sum(dF$dwtr) / length(dF$interaction))
+  mint <- append(mint, sum(dM$dwtr) / length(dM$interaction))
+}
+
+
+dint_dat <- data.frame(int, aint = dint, G = "A")
+mint_dat <- data.frame(int, aint = mint, G = "M")
+fint_dat <- data.frame(int, aint = fint, G = "F")
+int_dat <- full_join(mint_dat, full_join(fint_dat, dint_dat))
+int_dat$G <- as.factor(int_dat$G)
+
+
+ggplot(dint_dat, aes(int, aint)) + geom_point() + y_scale +
+  labs(x = "Interaction Level", y = "Dementia Rate", title = "Interaction Level vs Dementia Rates")
+ggplot(int_dat, aes(int, aint, color = G)) + geom_point(size = 2) + y_scale+
+  labs(x = "Interaction Level", y = "Dementia Rate", title = "Interaction Level vs Dementia Rates by Sex")
+
+dcom1 %>% 
+  filter(interaction < 6, age > 64) %>% 
+  ggplot(aes(interaction, dscore)) + geom_jitter()+
+  labs(x = "Interaction Level", y = "Dementia Score", title = "Interaction Level vs Dementia Scores")
+
+cor(dint_dat$aint, dint_dat$int)
+```
+
+
+```{r}
+dtp <- c()
+ftp <- c()
+mtp <- c()
+tp <- c(1:5)
+
+for(i in c(1:5)) {
+  d6 <- filter(dcom1, timepressure == i, age > 64)
+  dM <- filter(dcom1, timepressure == i, age > 64, sex == 1)
+  dF <- filter(dcom1, timepressure == i, age > 64, sex == 2)
+  dtp <- append(dtp, sum(d6$dwtr) / length(d6$timepressure))
+  ftp <- append(ftp, sum(dF$dwtr) / length(dF$timepressure))
+  mtp <- append(mtp, sum(dM$dwtr) / length(dM$timepressure))
+}
+
+
+dtp_dat <- data.frame(tp, atp = dtp, G = "A")
+mtp_dat <- data.frame(tp, atp = mtp, G = "M")
+ftp_dat <- data.frame(tp, atp = ftp, G = "F")
+tp_dat <- full_join(mtp_dat, full_join(ftp_dat, dtp_dat))
+tp_dat$G <- as.factor(tp_dat$G)
+
+
+ggplot(dtp_dat, aes(tp, atp)) + geom_point() + y_scale+
+  labs(x = "Amount of Time Pressure", y = "Dementia Rate", title = "Dementia Rate vs Time Pressure")
+ggplot(tp_dat, aes(tp, atp, color = G)) + geom_point(size = 2) + y_scale+
+  labs(x = "Amount of Time Pressure", y = "Dementia Rate", title = "Dementia Rate vs Time Pressure by Sex")
+
+dcom1 %>% 
+  filter(timepressure < 6, age > 64) %>% 
+  ggplot(aes(timepressure, dscore)) + geom_jitter()+
+  labs(x = "Amount of Time Pressure", y = "Dementia Score", title = "Dementia Scores vs Time Pressure")
+
+cor(dtp_dat$atp, dtp_dat$tp)
+
+dcom1 %>% 
+  filter(timepressure < 6, age > 64) %>% 
+  group_by(timepressure) %>% 
+  summarise(a = n(), per = mean(dwtr)) %>% 
+  ggplot(aes(timepressure, per)) + 
+    geom_point() +
+    y_scale #screams
+
+b <- dcom1 %>% 
+  filter(timepressure < 6, age > 64) %>% 
+  group_by(timepressure) %>% 
+  summarise(a = n(), per = mean(dwtr)) 
+cor(b$timepressure, b$per)
+
+```
+
+```{r}
+dhp <- c()
+fhp <- c()
+mhp <- c()
+hp <- c(1:5)
+
+for(i in c(1:5)) {
+  d6 <- filter(dcom1, hrs_personal < i*4, hrs_personal >= (i-1)*4, age > 64)
+  dhp <- append(dhp, sum(d6$dwtr) / length(d6$hrs_personal))
+}
+
+
+dhp_dat <- data.frame(hp, ahp = dhp, G = "A")
+
+ggplot(dhp_dat, aes(hp, ahp)) + geom_point() + y_scale +
+  labs(x = "Hours of Personal Care (per week)", y = "Dementia Rate", title = "Dementia Rate vs Time Spent on Personal Care") +
+  scale_x_continuous(labels = c("0-3", "4-7", "8-11", "12-15","16-19"))
+
+ggplot(dhp_dat, aes(hp, ahp)) + geom_col() + y_scale+
+  labs(x = "Hours of Personal Care (per week)", y = "Dementia Rate", title = "Dementia Rate vs Time Spent on Personal Care") +
+  scale_x_continuous(labels = c("0-3", "4-7", "8-11", "12-15","16-19"), breaks = c(1:5))
+
+
+dcom1 %>% 
+  filter(hrs_personal < 20, age > 64) %>% 
+  ggplot(aes(hrs_personal, dscore)) + geom_jitter()+
+  labs(x = "Hours of Personal Care (per week)", y = "Dementia Score", title = "Dementia Scores vs Time Spent on Personal Care") 
+
+cor(dhp_dat$hp, dhp_dat$ahp)
+
+```
+
+```{r}
+dhl <- c()
+fhl <- c()
+mhl <- c()
+hl <- c(1:13)
+
+for(i in c(1:13)) {
+  d6 <- filter(dcom1, hrs_leisure < i*5, hrs_leisure > (i-1)*5, age > 64)
+  dhl <- append(dhl, sum(d6$dwtr) / length(d6$hrs_leisure))
+}
+
+
+dhl_dat <- data.frame(hl, ahl = dhl, G = "A")
+
+
+ggplot(dhl_dat, aes(hl, ahl)) + geom_point() + geom_smooth(se = F) +
+  labs(x = "Hours of Leisure (per week)", y = "Dementia Rate", title = "Dementia Rate vs Leisure Time") +
+  scale_x_continuous(labels = c("0", "10", "20", "30", "40", "50", "60"), breaks = c(1,3,5,7,9,11,13))
+
+
+ggplot(dhl_dat, aes(hl, ahl)) + geom_col() +
+  labs(x = "Hours of Leisure (per week)", y = "Dementia Rate", title = "Dementia Rate vs Leisure Time") +
+  scale_x_continuous(labels = c("0", "10", "20", "30", "40", "50", "60"), breaks = c(1,3,5,7,9,11,13))
+
+dcom1 %>% 
+  filter(hrs_leisure < 65, age > 64) %>% 
+  ggplot(aes(hrs_leisure, dscore)) + geom_jitter()+
+  labs(x = "Hours of Leisure (per week)", y = "Dementia Score", title = "Dementia Scores vs Leisure Time") 
+
+```
+
+
+```{r}
+dsvp <- c()
+fsvp <- c()
+msvp <- c()
+svp <- c("0","3","5","6")
+
+dcom1$relig_svc_per <- as.character(dcom1$relig_svc_per)
+
+for(i in c("0","3","5","6")) {
+  d6 <- filter(dcom1, relig_svc_per == i, age > 64)
+  dM <- filter(dcom1, relig_svc_per == i, age > 64, sex == 1)
+  dF <- filter(dcom1, relig_svc_per == i, age > 64, sex == 2)
+  dsvp <- append(dsvp, sum(d6$dwtr) / length(d6$relig_svc_per))
+  fsvp <- append(fsvp, sum(dF$dwtr) / length(dF$relig_svc_per))
+  msvp <- append(msvp, sum(dM$dwtr) / length(dM$relig_svc_per))
+}
+
+
+dsvp_dat <- data.frame(svp, asvp = dsvp, G = "A")
+msvp_dat <- data.frame(svp, asvp = msvp, G = "M")
+fsvp_dat <- data.frame(svp, asvp = fsvp, G = "F")
+svp_dat <- full_join(msvp_dat, full_join(fsvp_dat, dsvp_dat))
+svp_dat$G <- as.factor(svp_dat$G)
+
+
+ggplot(dsvp_dat, aes(svp, asvp)) + geom_point() + y_scale +
+  scale_x_discrete(labels = c("Never", "Weekly", "Monthly","Annually")) +
+  labs(x = "Frequency of Attending Religious Services", y = "Dementia Rate", title = "Dementia Rate vs Service Attendance")
+ggplot(svp_dat, aes(svp, asvp, color = G)) + geom_point(size = 2) + y_scale +
+  scale_x_discrete(labels = c("Never", "Weekly", "Monthly","Annually")) +
+  labs(x = "Frequency of Attending Religious Services", y = "Dementia Rate", title = "Dementia Rate vs Service Attendance by Sex")
+
+dcom1 %>% 
+  filter(relig_svc_per == svp, age > 64) %>% 
+  ggplot(aes(relig_svc_per, dscore)) + geom_jitter() +
+  scale_x_discrete(labels = c("Never", "Weekly", "Monthly","Annually")) +
+  labs(x = "Frequency of Attending Religious Services", y = "Dementia Rate", title = "Dementia Rate vs Service Attendance")
+
+dcom1 %>% 
+  mutate(relyn = ifelse(relig == 0, 0, 1)) %>% 
+  group_by(relyn) %>% 
+  filter(age < 64) %>% 
+  summarise(n(), sum(dwtr))
+
+dcom1 %>% 
+  filter(age > 64) %>% 
+  group_by(relig) %>% 
+  summarise(sum(dwtr) / n())
+# yes I should have done everything this way but I only realized that just now oops
+```
+

@@ -1,0 +1,2104 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Dementia\_Working\_Final},
+            pdfauthor={Isabelle Sanford},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Dementia\_Working\_Final}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Isabelle Sanford}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{1/14/2020}
+
+
+\begin{document}
+\maketitle
+
+I. HISTORIES a. Sex b. Age c.~Region d.~Education
+
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  PRESENT LIFE A. SCORES
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    General Health
+  \item
+    Life Satisfaction
+  \item
+    Amount of Mental Activity
+  \item
+    Rate of Interaction
+  \item
+    Time Pressure B. TIME AMOUNTS
+  \item
+    Hours of Personal Care
+  \item
+    Hours of Leisure Time
+  \item
+    Frequency of Attending Religious Services
+  \end{enumerate}
+\item
+  POTENTIAL ISSUES
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Age
+\item
+  Time Amounts - Binning
+\end{enumerate}
+
+This project examined dementia, looking both at the history of people
+with and without dementia and at their current lives. The former is
+useful for looking at factors which may impact the likelihood of future
+dementia, while the latter underscores the difficulties those with
+dementia face.
+
+The data used are from the University of Michigan's Panel Study of
+Income Dynamics, from 2017. The entire family unit was part of the
+survey, so data is not only self-reported but often also by a spouse or
+other family member of the household. (Note that this means everyone
+with a spouse is double-counted while those without are not; a self
+report is distinct enough from someone else's perspective that it was
+judged unhelpful to combine the two in some way. A future report might
+examine self-reported data vs spouse-reported, or separate them out.)
+
+Dementia was calculated to mean 2 or more of 8 factors, which are
+regularly used as an assessment of dementia. These are whether in the
+last several years the person has had a change in: - Making decisions -
+Amount of interest in activities - Repeating stories or statements over
+and over - Learning how to use tools (e.g.~a TV or phone) - Remembering
+dates - Trouble with handling money issues - Remembering appointments -
+Thinking or memory overall
+
+The age range selected was 65 and older, as most dementia patients are
+elderly and should thus be compared with other elderly people.
+
+I. HISTORIES All of these factors would almost always have been set
+before the age of 65, and so are considered `historical'. The
+correlations (or lack thereof) with dementia are laid out below.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  Sex There appears to be no correlation between sex and prevalence of
+  dementia. Out of about 3700 points of data (split evenly between
+  sexes), 20.6\% of men and 18.7\% of women had dementia, only about 2
+  percentage points different. With this size of dataset, that
+  difference is likely statistically insignificant.
+\item
+  Age As would be expected, age correlates heavily with likelihood of
+  dementia. About 13\% of 65-year-olds have dementia, while 45\% of
+  90-year-olds do. (This becomes 90\% at 100 years, but there are few
+  enough data points to make that result uncertain at best.)
+\item
+  Region If region of the US has an effect, it's relatively small (14\%
+  vs 22\% high and low). It's still worth noting, however, that the
+  Northeast (closely followed by the West) has both the lowest rate of
+  dementia and the smallest number of elderly surveyed (500 as opposed
+  to 1800 in the South).
+\item
+  Education Interestingly, education does appear to correlate reasonably
+  strongly with dementia. Those who did not complete high school have by
+  far the highest rate, at 37\%. This rate steadily decreases by highest
+  level of education down to just 10\% of Masters or equivalent
+  recipients. PhD graduates tick back up to 13\% (probably not
+  statistically significant). Higher education in this case may be a
+  proxy for socioeconomic status, which in turn may affect health
+  through living conditions or lack of ability to get treatment.
+  Alternatively, higher education leads to better working conditions:
+  hard labor vs technical / mechanical labor vs non-physical labor. Or
+  perhaps it's not the state of the working conditions that matters, but
+  the amount to which they require frequent exercise of complex mental
+  abilities.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  PRESENT LIFE Each of the below variables are about the individual's
+  life as it presently is.
+\end{enumerate}
+
+A. SCORES All of these variables were scored on a scale of 1 to 5, where
+5 is ``most'' of the variable in question and 1 is ``least''. Note that
+this corresponds to 5 being best and 1 worst, except in the case of time
+pressure.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  General Health Unsurprisingly, general health status correlates very
+  strongly with dementia, with a correlation coefficient of .96. So all
+  else being statistically equal (injury, etc), dementia probably has a
+  very strong impact on health. (It's also possible that general
+  physical health being low might make dementia more likely, but this
+  seems an unlikely direction of correlation.)
+\item
+  Life Satisfaction Overall life satisfaction is even more highly
+  correlated, but negatively, with a coefficient of -.997. That is,
+  individuals with dementia were much, much more likely to report lower
+  overall life satisfaction than those without. This is fairly
+  intuitive, but the strength of the correlation is admittedly
+  surprising, as is the difference between highest and lowest scores:
+  highest life satisfaction had 12\% of individuals having dementia,
+  whereas lowest was 46\%.
+\item
+  Amount of Mental Activity With a correlation coefficient of -.87, the
+  amount of mental activity an individual engages in is certainly
+  related to dementia (as would make sense). 28\% of individuals who
+  reported lowest for mental activity had dementia, as opposed to 11\%
+  of individuals who reported highest. An interesting topic of further
+  study (with different data, or in future years if they keep this
+  question on the survey) would be examining the mental activity levels
+  in the past of current dementia patients.
+\item
+  Rate of Interaction Somewhat expectedly, interaction correlates
+  negatively with dementia (cor = -.91). This seems likely to be at
+  least in part due to the difficulty for individuals with severe
+  dementia to interact with others, and possibly even remember
+  interacting.
+\item
+  Time Pressure How often an individual feels pressed for time does not
+  appear to correlate strongly with dementia: despite its correlation
+  coefficient of .55 (see IIIa), all but one metric fall seemingly
+  randomly within the same six percentage points (15 - 21\%), and the
+  last (most pressed for time, at 34\%) has significantly less data. A
+  close look at this could prove useful, but it seems more likely to be
+  a statistical error.
+\end{enumerate}
+
+B. TIME AMOUNTS Rather than a score between 1 and 5, the variables below
+are in concrete units representing exactly how often they happen in the
+individual's life. Note that values here are more uncertain (see IIIb).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  Hours of Personal Care (per week) Here, there seems to be a slightly
+  higher proportion of dementia patients among individuals who recorded
+  a low number of hours. Between 0 and 5 hours, 30\% of individuals had
+  dementia, while 15 to 20 hours was made up of only 12\% dementia
+  patients. This seems reasonable, though may well be more of an implied
+  correlation with age than directly with dementia.
+\item
+  Hours of Leisure (per week) Between about 0 and 30 hours per week of
+  leisure time, the proportion of dementia patients seems approximately
+  steady at 20\%, i.e.~exactly average. Further onward, though, the
+  proportion rises quickly up to a striking 55\% at 60 hours per week.
+  This is surprisingly strong, but still understandable: those retired
+  and without dementia are much more likely to spend time on activities
+  they wouldn't count as leisure, like volunteering, shopping, and so
+  on.
+\item
+  Frequency of Attending Religious Services Interestingly, there may be
+  some correlation here with dementia. Individuals who never attended
+  religious services had a 26\% portion of dementia, while individuals
+  attending weekly or monthly saw 17\% and 12\% rates respectively.
+  Yearly visitors were just above weekly at 18\%. It's possible that
+  people with dementia have less motivation or ability to attend
+  services, but there could be some other factor which makes
+  service-goers less likely to have dementia. (That factor doesn't
+  appear to be religion in general, though, as at a glance the atheist
+  vs religious groups have similar proportions.)
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  POTENTIAL ISSUES
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Age This analysis may have an underlying factor of age for many of
+  these variables: i.e.~some part of the correlation may well because
+  both dementia and X other variable both correlate with age. This seems
+  especially likely with general health and life satisfaction, for
+  instance. This would explain the unusual number of very high
+  correlation coefficients. Given more time or resources*, a model which
+  takes this into account would be very useful.
+\end{enumerate}
+
+*i.e.~if I'd procrastinated less or attended the week on modeling /
+asked you about it so it wasn't incredibly confusing
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Time Amounts - Binning With section IIB, each graph had to choose a
+  bin size that seemed reasonable for the data, in order to make any
+  analysis at all. Given this was due to personal discretion, it may be
+  more likely to be biased in favor of clear trends, and/or there may be
+  clear trends in a bin size different than any tried. Thus the
+  uncertainty in conclusions compared to IIA.
+\end{enumerate}
+
+Setup
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages ---------------------------------------------------------- tidyverse 1.2.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.2.1     v purrr   0.3.2
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(rvest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: xml2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'rvest'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     pluck
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:readr':
+## 
+##     guess_encoding
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(hexbin)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'hexbin' was built under R version 3.6.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(RColorBrewer)}
+\KeywordTok{library}\NormalTok{(ggrepel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggrepel' was built under R version 3.6.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(viridisLite)}
+\KeywordTok{library}\NormalTok{(foreign)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'foreign' was built under R version 3.6.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tinytex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tinytex' was built under R version 3.6.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d1 <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"Data2.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   .default = col_double()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{labels <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"Labels2.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   Number = col_character(),
+##   Variable = col_character(),
+##   New = col_character()
+## )
+\end{verbatim}
+
+Labeling and Cleaning
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{labels <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(labels, }\KeywordTok{is.na}\NormalTok{(New) }\OperatorTok{==}\StringTok{ }\OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(d1) <-}\StringTok{ }\NormalTok{labels}\OperatorTok{$}\NormalTok{New}
+
+
+\NormalTok{d2 <-}\StringTok{ }\KeywordTok{select}\NormalTok{(d1,}\OperatorTok{-}\NormalTok{delete1, }\OperatorTok{-}\NormalTok{delete2, }\OperatorTok{-}\NormalTok{delete, }\OperatorTok{-}\NormalTok{delete3, }\OperatorTok{-}\NormalTok{delete4, }\OperatorTok{-}\NormalTok{delete5)}
+
+
+\NormalTok{d3 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(d2, R65plus }\OperatorTok{==}\StringTok{ }\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{S65plus }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Combining Head \& Spouse data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dR <-}\StringTok{ }\KeywordTok{select}\NormalTok{(d3, }\OperatorTok{-}\KeywordTok{c}\NormalTok{(Isex, Sretiredwhen, Sage, Ssex, Shrs_personal, Shrs_leisure, Shrs_volunteer, Sinteraction, Smental_activity, Stimepressure, Shealth_general, Swtr_memloss, Sage_memloss, Smeds_memloss, S65plus, Sc_decisions, Swtr_hospital, S_hosp_nights, S_hosp_weeks, Syr_uni, Smajor_}\DecValTok{1}\NormalTok{, Smajor_}\DecValTok{2}\NormalTok{, Syr_unigrad, Srelig, Sdenom, Srelig_svc_num, Srelig_svc_per),}\OperatorTok{-}\KeywordTok{c}\NormalTok{(Swtr_hsgrad, Sged_grade, Shs_grade, Swtr_uni, Suni_grade, Swtr_unigrad, Shighest_degree), }\OperatorTok{-}\KeywordTok{c}\NormalTok{(Sc_interest, Sc_story_repeats, Sc_learning, Sc_datemem, Sc_money, Sc_apptmem, Sc_memory, Sc_decisions), Rsex, Rage) }\CommentTok{# sometimes an R value}
+
+
+\NormalTok{dS <-}\StringTok{ }\KeywordTok{select}\NormalTok{(d3, FID68, PID68, FID17, PID17, state, wtr_medical_bills, medical_bills, Fwtr_HI, Fwtr_noHI, exp_hosp_nursing, exp_presc_etc, Fmedbills_amt, Fmedbills_wtr, exp_healthbills, Fexp_hosp_nurs, Fexp_presc_etc, Fexp_HI, region, weight, FID17_, seqnum, relation, wtr_R, F_wtr_HI, Isex, }
+             \DataTypeTok{retiredwhen =}\NormalTok{ Sretiredwhen,}
+             \DataTypeTok{age =}\NormalTok{ Sage, }
+             \DataTypeTok{sex =}\NormalTok{ Ssex, }
+             \DataTypeTok{hrs_personal =}\NormalTok{ Shrs_personal, }
+             \DataTypeTok{hrs_leisure =}\NormalTok{ Shrs_leisure, }
+             \DataTypeTok{hrs_volunteer =}\NormalTok{ Shrs_volunteer, }
+             \DataTypeTok{interaction =}\NormalTok{ Sinteraction, }
+             \DataTypeTok{mental_activity =}\NormalTok{ Smental_activity, }
+             \DataTypeTok{timepressure =}\NormalTok{ Stimepressure, }
+             \DataTypeTok{health_general =}\NormalTok{ Shealth_general, }
+             \DataTypeTok{wtr_memloss =}\NormalTok{ Swtr_memloss, }
+             \DataTypeTok{age_memloss =}\NormalTok{ Sage_memloss, }
+             \DataTypeTok{meds_memloss =}\NormalTok{ Smeds_memloss, }
+             \DataTypeTok{if65 =}\NormalTok{ S65plus, }
+             \DataTypeTok{wtr_hospital =}\NormalTok{ Swtr_hospital, }
+             \DataTypeTok{hosp_nights =}\NormalTok{ S_hosp_nights, }
+             \DataTypeTok{hosp_weeks =}\NormalTok{ S_hosp_weeks, }
+             \DataTypeTok{yr_uni =}\NormalTok{ Syr_uni, }
+             \DataTypeTok{major_1 =}\NormalTok{ Smajor_}\DecValTok{1}\NormalTok{, }
+             \DataTypeTok{major_2 =}\NormalTok{ Smajor_}\DecValTok{2}\NormalTok{, }
+             \DataTypeTok{yr_unigrad =}\NormalTok{ Syr_unigrad, }
+             \DataTypeTok{relig =}\NormalTok{ Srelig, }
+             \DataTypeTok{denom =}\NormalTok{ Sdenom, }
+             \DataTypeTok{relig_svc_num =}\NormalTok{ Srelig_svc_num, }
+             \DataTypeTok{relig_svc_per =}\NormalTok{ Srelig_svc_per,}
+             \DataTypeTok{wtr_hsgrad =}\NormalTok{ Swtr_hsgrad, }
+             \DataTypeTok{ged_grad =}\NormalTok{ Sged_grade, }
+             \DataTypeTok{hs_grade =}\NormalTok{ Shs_grade, }
+             \DataTypeTok{wtr_uni =}\NormalTok{ Swtr_uni, }
+             \DataTypeTok{uni_grade =}\NormalTok{ Suni_grade, }
+             \DataTypeTok{wtr_unigrad =}\NormalTok{ Swtr_unigrad, }
+             \DataTypeTok{highest_degree =}\NormalTok{ Shighest_degree,}
+             \DataTypeTok{c_interest =}\NormalTok{ Sc_interest, }
+             \DataTypeTok{c_story_repeats =}\NormalTok{ Sc_story_repeats, }
+             \DataTypeTok{c_learning =}\NormalTok{ Sc_learning, }
+             \DataTypeTok{c_datemem =}\NormalTok{ Sc_datemem, }
+             \DataTypeTok{c_money =}\NormalTok{ Sc_money, }
+             \DataTypeTok{c_apptmem =}\NormalTok{ Sc_apptmem, }
+             \DataTypeTok{c_memory =}\NormalTok{ Sc_memory, }
+             \DataTypeTok{c_decisions =}\NormalTok{ Sc_decisions)}
+
+
+\NormalTok{dR <-}\StringTok{ }\KeywordTok{rename}\NormalTok{(dR, }\DataTypeTok{retiredwhen =}\NormalTok{ Rretiredwhen, }
+             \DataTypeTok{age =}\NormalTok{ Rage, }
+             \DataTypeTok{sex =}\NormalTok{ Rsex,}
+             \DataTypeTok{hrs_personal =}\NormalTok{ Rhrs_personal, }
+             \DataTypeTok{hrs_leisure =}\NormalTok{ Rhrs_leisure, }
+             \DataTypeTok{hrs_volunteer =}\NormalTok{ Rhrs_volunteer, }
+             \DataTypeTok{interaction =}\NormalTok{ Rinteraction, }
+             \DataTypeTok{mental_activity =}\NormalTok{ Rmental_activity, }
+             \DataTypeTok{timepressure =}\NormalTok{ Rtimepressure, }
+             \DataTypeTok{health_general =}\NormalTok{ Rhealth_general, }
+             \DataTypeTok{wtr_memloss =}\NormalTok{ Rwtr_memloss, }
+             \DataTypeTok{age_memloss =}\NormalTok{ Rage_memloss, }
+             \DataTypeTok{meds_memloss =}\NormalTok{ Rmeds_memloss, }
+             \DataTypeTok{if65 =}\NormalTok{ R65plus, }
+             \DataTypeTok{wtr_hospital =}\NormalTok{ Rwtr_hospital, }
+             \DataTypeTok{hosp_nights =}\NormalTok{ R_hosp_nights, }
+             \DataTypeTok{hosp_weeks =}\NormalTok{ R_hosp_weeks, }
+             \DataTypeTok{yr_uni =}\NormalTok{ Ryr_uni, }
+             \DataTypeTok{major_1 =}\NormalTok{ Rmajor_}\DecValTok{1}\NormalTok{, }
+             \DataTypeTok{major_2 =}\NormalTok{ Rmajor_}\DecValTok{2}\NormalTok{, }
+             \DataTypeTok{yr_unigrad =}\NormalTok{ Ryr_unigrad, }
+             \DataTypeTok{relig =}\NormalTok{ Rrelig, }
+             \DataTypeTok{denom =}\NormalTok{ Rdenom, }
+             \DataTypeTok{relig_svc_num =}\NormalTok{ Rrelig_svc_num, }
+             \DataTypeTok{relig_svc_per =}\NormalTok{ Rrelig_svc_per, }
+             \DataTypeTok{wtr_hsgrad =}\NormalTok{ Rwtr_hsgrad, }
+             \DataTypeTok{ged_grade =}\NormalTok{ Rged_grade, }
+             \DataTypeTok{hs_grade =}\NormalTok{ Rhs_grade, }
+             \DataTypeTok{wtr_uni =}\NormalTok{ Rwtr_uni, }
+             \DataTypeTok{uni_grade =}\NormalTok{ Runi_grade, }
+             \DataTypeTok{wtr_unigrad =}\NormalTok{ Rwtr_unigrad, }
+             \DataTypeTok{highest_degree =}\NormalTok{ Rhighest_degree,}
+             \DataTypeTok{c_interest =}\NormalTok{ Rc_interest, }
+             \DataTypeTok{c_story_repeats =}\NormalTok{ Rc_story_repeats, }
+             \DataTypeTok{c_learning =}\NormalTok{ Rc_learning, }
+             \DataTypeTok{c_datemem =}\NormalTok{ Rc_datemem, }
+             \DataTypeTok{c_money =}\NormalTok{ Rc_money, }
+             \DataTypeTok{c_apptmem =}\NormalTok{ Rc_apptmem, }
+             \DataTypeTok{c_memory =}\NormalTok{ Rc_memory, }
+             \DataTypeTok{c_decisions =}\NormalTok{ Rc_decisions)}
+
+\NormalTok{dcom <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(dR, dS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("FID68", "PID68", "FID17", "PID17", "state", "age", "sex", "retiredwhen", "hrs_personal", "hrs_volunteer", "hrs_leisure", "interaction", "mental_activity", "timepressure", "wtr_medical_bills", "medical_bills", "health_general", "wtr_memloss", "age_memloss", "meds_memloss", "if65", "c_decisions", "c_interest", "c_story_repeats", "c_learning", "c_datemem", "c_money", "c_apptmem", "c_memory", "wtr_hospital", "hosp_nights", "hosp_weeks", "Fwtr_HI", "Fwtr_noHI", "exp_hosp_nursing", "exp_presc_etc", "wtr_hsgrad", "hs_grade", "wtr_uni", "yr_uni", "uni_grade", "wtr_unigrad", "highest_degree", "major_1", "major_2", "yr_unigrad", "relig", "denom", "relig_svc_num", "relig_svc_per", "Fmedbills_wtr", "Fmedbills_amt", "exp_healthbills", "Fexp_hosp_nurs", "Fexp_presc_etc", "Fexp_HI", "region", "weight", "FID17_", "seqnum", "relation", "wtr_R", "F_wtr_HI")
+\end{verbatim}
+
+Education \& Dementia scores
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{educ <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{highest_degree }\OperatorTok{>}\StringTok{ }\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{highest_degree }\OperatorTok{==}\StringTok{ }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{highest_degree }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{highest_degree }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{wtr_uni }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{wtr_hsgrad }\OperatorTok{<}\StringTok{ }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))))))}
+
+\NormalTok{dscore <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{c_decisions }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{c_interest }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{c_story_repeats }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{c_learning }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{c_datemem }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{c_money }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{c_apptmem }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{ifelse}\NormalTok{(dcom}\OperatorTok{$}\NormalTok{c_memory }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+
+
+\NormalTok{dcom1 <-}\StringTok{ }\NormalTok{dcom }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{c}\NormalTok{(c_interest, c_story_repeats, c_learning, c_datemem, c_money, c_apptmem, c_memory, c_decisions)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{c}\NormalTok{(wtr_hsgrad, ged_grade, hs_grade, wtr_uni, uni_grade, wtr_unigrad, highest_degree)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dscore =}\NormalTok{ dscore, }\DataTypeTok{educ =}\NormalTok{ educ)}
+
+\NormalTok{dwtr <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(dscore }\OperatorTok{>}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{dcom1 <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(dcom1, }\DataTypeTok{dwtr =}\NormalTok{ dwtr)}
+\end{Highlighting}
+\end{Shaded}
+
+Key: PhD 7 MA 6 Bach 5 Assoc 4 Yr coll 3 HS / GED 2 grade 1-11
+\textgreater{} 1
+
+Graph Axis Prep
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y_scale <-}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,.}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+I. HISTORY VARIABLES a. D vs Sex
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1  }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(sex }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, dscore }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(sex, dscore)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_jitter}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_summary}\NormalTok{(}\DataTypeTok{fun.y =}\NormalTok{ mean, }\DataTypeTok{geom =} \StringTok{"point"}\NormalTok{, }\DataTypeTok{shape =} \DecValTok{23}\NormalTok{, }\DataTypeTok{size =} \DecValTok{4}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(}\KeywordTok{filter}\NormalTok{(dcom1, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, dwtr }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)) }\OperatorTok{/}\StringTok{ }\KeywordTok{dim}\NormalTok{(}\KeywordTok{filter}\NormalTok{(dcom1, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8021654 1.0000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(}\KeywordTok{filter}\NormalTok{(dcom1, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{, dwtr }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)) }\OperatorTok{/}\StringTok{ }\KeywordTok{dim}\NormalTok{(}\KeywordTok{filter}\NormalTok{(dcom1, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8132586 1.0000000
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Dementia vs Age
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{avgscore <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{25}\NormalTok{)) \{}
+\NormalTok{  d4 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, age }\OperatorTok{==}\StringTok{ }\NormalTok{i }\OperatorTok{+}\StringTok{ }\DecValTok{65}\NormalTok{)}
+\NormalTok{  avgscore <-}\StringTok{ }\KeywordTok{append}\NormalTok{(avgscore, }\KeywordTok{mean}\NormalTok{(d4}\OperatorTok{$}\NormalTok{dscore))}
+\NormalTok{\}}
+
+\NormalTok{age <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{65}\OperatorTok{:}\DecValTok{90}\NormalTok{)}
+
+\NormalTok{Scoredata <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(age, avgscore)}
+
+\KeywordTok{ggplot}\NormalTok{(Scoredata, }\KeywordTok{aes}\NormalTok{(age, avgscore)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{avgscore1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{25}\NormalTok{)) \{}
+\NormalTok{  d4 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, age }\OperatorTok{==}\StringTok{ }\NormalTok{i }\OperatorTok{+}\StringTok{ }\DecValTok{65}\NormalTok{)}
+\NormalTok{  avg1 <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(d4}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d4}\OperatorTok{$}\NormalTok{dwtr)}
+\NormalTok{  avgscore1 <-}\StringTok{ }\KeywordTok{append}\NormalTok{(avgscore1, avg1)}
+\NormalTok{\}}
+
+
+\NormalTok{Scoredata <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(age, avgscore1)}
+
+\KeywordTok{ggplot}\NormalTok{(Scoredata, }\KeywordTok{aes}\NormalTok{(age, avgscore1)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{>}\StringTok{ }\DecValTok{65}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(age, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-7-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(Scoredata}\OperatorTok{$}\NormalTok{age, Scoredata}\OperatorTok{$}\NormalTok{avgscore1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8146907
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  D vs Region (label axis scale!)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f_rat_reg <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{m_rat_reg <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{all_rat_reg <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{)) \{}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, region }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, region }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  d14 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, region }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{  f_rat_reg <-}\StringTok{ }\KeywordTok{append}\NormalTok{(f_rat_reg, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{region))}
+\NormalTok{  m_rat_reg <-}\StringTok{ }\KeywordTok{append}\NormalTok{(m_rat_reg, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{region))}
+\NormalTok{  all_rat_reg <-}\StringTok{ }\KeywordTok{append}\NormalTok{(all_rat_reg, }\KeywordTok{sum}\NormalTok{(d14}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d14}\OperatorTok{$}\NormalTok{region))}
+\NormalTok{\}}
+
+
+\NormalTok{reg <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{)}
+
+
+\NormalTok{mrat_reg <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(reg, }\DataTypeTok{rat_reg =}\NormalTok{ m_rat_reg, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{frat_reg <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(reg, }\DataTypeTok{rat_reg =}\NormalTok{ f_rat_reg, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{allreg <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(reg, }\DataTypeTok{rat_reg =}\NormalTok{ all_rat_reg, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{grat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(mrat_reg, frat_reg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("reg", "rat_reg", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{drat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(grat, allreg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("reg", "rat_reg", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining character vector and factor, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{drat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(drat}\OperatorTok{$}\NormalTok{G)}
+
+\KeywordTok{ggplot}\NormalTok{(drat, }\KeywordTok{aes}\NormalTok{(reg, rat_reg, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(allreg, }\KeywordTok{aes}\NormalTok{(reg, rat_reg)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(region }\OperatorTok{<}\StringTok{ }\DecValTok{5}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(region, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-8-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(region) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\KeywordTok{n}\NormalTok{(), }\KeywordTok{mean}\NormalTok{(dwtr))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   region `n()` `mean(dwtr)`
+##    <dbl> <int>        <dbl>
+## 1      1   526        0.139
+## 2      2   986        0.213
+## 3      3  1798        0.205
+## 4      4   829        0.177
+## 5      5    10        0.2  
+## 6      6    25        0.04
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  D vs Education (axis scale)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f_rat_ed <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{m_rat_ed <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{all_rat_ed <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{)) \{}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, educ }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, educ }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  d14 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, educ }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{  f_rat_ed <-}\StringTok{ }\KeywordTok{append}\NormalTok{(f_rat_ed, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{educ))}
+\NormalTok{  m_rat_ed <-}\StringTok{ }\KeywordTok{append}\NormalTok{(m_rat_ed, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{educ))}
+\NormalTok{  all_rat_ed <-}\StringTok{ }\KeywordTok{append}\NormalTok{(all_rat_ed, }\KeywordTok{sum}\NormalTok{(d14}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d14}\OperatorTok{$}\NormalTok{educ))}
+\NormalTok{\}}
+
+
+\NormalTok{ed <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{)}
+
+
+\NormalTok{med_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ed, }\DataTypeTok{rat_ed =}\NormalTok{ m_rat_ed, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{fed_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ed, }\DataTypeTok{rat_ed =}\NormalTok{ f_rat_ed, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{ded_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ed, }\DataTypeTok{rat_ed =}\NormalTok{ all_rat_ed, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{ed_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(med_dat, fed_dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("ed", "rat_ed", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ed_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(ed_dat, ded_dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("ed", "rat_ed", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining character vector and factor, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ed_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(ed_dat}\OperatorTok{$}\NormalTok{G)}
+
+\KeywordTok{ggplot}\NormalTok{(ed_dat, }\KeywordTok{aes}\NormalTok{(ed, rat_ed, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(ded_dat, }\KeywordTok{aes}\NormalTok{(ed, rat_ed)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(educ }\OperatorTok{<}\StringTok{ }\DecValTok{8}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(educ, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-9-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(educ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\KeywordTok{n}\NormalTok{(), }\KeywordTok{mean}\NormalTok{(dwtr))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 3
+##    educ `n()` `mean(dwtr)`
+##   <dbl> <int>        <dbl>
+## 1     1   229       0.389 
+## 2     2   894       0.196 
+## 3     3   408       0.203 
+## 4     4   116       0.0776
+## 5     5   261       0.0843
+## 6     6   181       0.0773
+## 7     7    53       0.151
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  PRESENT LIFE
+\end{enumerate}
+
+A. SCORES a. General Health
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dhg <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fhg <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mhg <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{hg <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, health_general }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, health_general }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, health_general }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  dhg <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dhg, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr))}
+\NormalTok{  fhg <-}\StringTok{ }\KeywordTok{append}\NormalTok{(fhg, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr))}
+\NormalTok{  mhg <-}\StringTok{ }\KeywordTok{append}\NormalTok{(mhg, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr))}
+\NormalTok{\}}
+
+
+\NormalTok{dhg_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(hg, }\DataTypeTok{ahg =}\NormalTok{ dhg, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{mhg_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(hg, }\DataTypeTok{ahg =}\NormalTok{ mhg, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{fhg_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(hg, }\DataTypeTok{ahg =}\NormalTok{ fhg, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{hg_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(mhg_dat, }\KeywordTok{full_join}\NormalTok{(fhg_dat, dhg_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("hg", "ahg", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{verbatim}
+## Joining, by = c("hg", "ahg", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factor and character vector, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hg_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(hg_dat}\OperatorTok{$}\NormalTok{G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dhg_dat, }\KeywordTok{aes}\NormalTok{(hg, ahg)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{, }\DataTypeTok{se =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(hg_dat, }\KeywordTok{aes}\NormalTok{(hg, ahg, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-10-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(health_general }\OperatorTok{<}\StringTok{ }\DecValTok{6}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(health_general, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-10-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(hg_dat}\OperatorTok{$}\NormalTok{hg, hg_dat}\OperatorTok{$}\NormalTok{ahg) }\CommentTok{# This seems unreasonably high}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9599354
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  D vs Life Satisfaction (points \& jitter)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dls <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fls <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mls <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{ls <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\OperatorTok{:}\DecValTok{1}\NormalTok{) }\CommentTok{# because scale is dumb and 1 is best}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, life_satisf }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, life_satisf }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, life_satisf }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  dls <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dls, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{life_satisf))}
+\NormalTok{  fls <-}\StringTok{ }\KeywordTok{append}\NormalTok{(fls, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{life_satisf))}
+\NormalTok{  mls <-}\StringTok{ }\KeywordTok{append}\NormalTok{(mls, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{life_satisf))}
+\NormalTok{\}}
+
+
+\NormalTok{dls_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ls, }\DataTypeTok{als =}\NormalTok{ dls, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{mls_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ls, }\DataTypeTok{als =}\NormalTok{ mls, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{fls_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ls, }\DataTypeTok{als =}\NormalTok{ fls, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{ls_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(mls_dat, }\KeywordTok{full_join}\NormalTok{(fls_dat, dls_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("ls", "als", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{verbatim}
+## Joining, by = c("ls", "als", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factor and character vector, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ls_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(ls_dat}\OperatorTok{$}\NormalTok{G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dls_dat, }\KeywordTok{aes}\NormalTok{(ls, als)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(ls_dat, }\KeywordTok{aes}\NormalTok{(ls, als, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-11-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(life_satisf }\OperatorTok{<}\StringTok{ }\DecValTok{6}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(life_satisf, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-11-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(dls_dat}\OperatorTok{$}\NormalTok{ls, dls_dat}\OperatorTok{$}\NormalTok{als)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.9972192
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  D vs Mental Activity (points)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dma <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fma <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mma <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{ma <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, mental_activity }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, mental_activity }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, mental_activity }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  dma <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dma, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{mental_activity))}
+\NormalTok{  fma <-}\StringTok{ }\KeywordTok{append}\NormalTok{(fma, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{mental_activity))}
+\NormalTok{  mma <-}\StringTok{ }\KeywordTok{append}\NormalTok{(mma, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{mental_activity))}
+\NormalTok{\}}
+
+
+\NormalTok{dma_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ma, }\DataTypeTok{ama =}\NormalTok{ dma, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{mma_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ma, }\DataTypeTok{ama =}\NormalTok{ mma, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{fma_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ma, }\DataTypeTok{ama =}\NormalTok{ fma, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{ma_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(mma_dat, }\KeywordTok{full_join}\NormalTok{(fma_dat, dma_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("ma", "ama", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{verbatim}
+## Joining, by = c("ma", "ama", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factor and character vector, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ma_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(ma_dat}\OperatorTok{$}\NormalTok{G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dma_dat, }\KeywordTok{aes}\NormalTok{(ma, ama)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(ma_dat, }\KeywordTok{aes}\NormalTok{(ma, ama, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-12-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(mental_activity }\OperatorTok{<}\StringTok{ }\DecValTok{6}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(mental_activity, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-12-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(dma_dat}\OperatorTok{$}\NormalTok{ma, dma_dat}\OperatorTok{$}\NormalTok{ama)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.8652993
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  D vs Interaction (points)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dint <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fint <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mint <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{int <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, interaction }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, interaction }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, interaction }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  dint <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dint, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{interaction))}
+\NormalTok{  fint <-}\StringTok{ }\KeywordTok{append}\NormalTok{(fint, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{interaction))}
+\NormalTok{  mint <-}\StringTok{ }\KeywordTok{append}\NormalTok{(mint, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{interaction))}
+\NormalTok{\}}
+
+
+\NormalTok{dint_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(int, }\DataTypeTok{aint =}\NormalTok{ dint, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{mint_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(int, }\DataTypeTok{aint =}\NormalTok{ mint, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{fint_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(int, }\DataTypeTok{aint =}\NormalTok{ fint, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{int_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(mint_dat, }\KeywordTok{full_join}\NormalTok{(fint_dat, dint_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("int", "aint", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{verbatim}
+## Joining, by = c("int", "aint", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factor and character vector, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{int_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(int_dat}\OperatorTok{$}\NormalTok{G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dint_dat, }\KeywordTok{aes}\NormalTok{(int, aint)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(int_dat, }\KeywordTok{aes}\NormalTok{(int, aint, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-13-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(interaction }\OperatorTok{<}\StringTok{ }\DecValTok{6}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(interaction, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-13-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(dint_dat}\OperatorTok{$}\NormalTok{aint, dint_dat}\OperatorTok{$}\NormalTok{int)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.9198645
+\end{verbatim}
+
+(bcd) Combination of previous 3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dma_dat <-}\StringTok{ }\KeywordTok{rename}\NormalTok{(dma_dat, }\DataTypeTok{vec =}\NormalTok{ ma)}
+\NormalTok{dls_dat <-}\StringTok{ }\KeywordTok{rename}\NormalTok{(dls_dat, }\DataTypeTok{vec =}\NormalTok{ ls)}
+\NormalTok{dint_dat <-}\StringTok{ }\KeywordTok{rename}\NormalTok{(dint_dat, }\DataTypeTok{vec =}\NormalTok{ int)}
+
+\NormalTok{dat3 <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(dma_dat, }\KeywordTok{full_join}\NormalTok{(dls_dat, dint_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("vec", "G")
+## Joining, by = c("vec", "G")
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   vec       ama G       als      aint
+## 1   1 0.2841163 A 0.4722222 0.4444444
+## 2   2 0.2069328 A 0.3695652 0.2802768
+## 3   3 0.1733840 A 0.2857143 0.2113402
+## 4   4 0.1087866 A 0.1806303 0.1680556
+## 5   5 0.1535714 A 0.1177347 0.1587575
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{avg <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)) \{}
+\CommentTok{#  filter(dat3, vec == i)}
+\NormalTok{  vec1 <-}\StringTok{ }\NormalTok{(dat3}\OperatorTok{$}\NormalTok{ama[i] }\OperatorTok{+}\StringTok{ }\NormalTok{dat3}\OperatorTok{$}\NormalTok{als[i] }\OperatorTok{+}\StringTok{ }\NormalTok{dat3}\OperatorTok{$}\NormalTok{aint[i]) }\OperatorTok{/}\StringTok{ }\DecValTok{3}
+\NormalTok{  avg <-}\StringTok{ }\KeywordTok{append}\NormalTok{(avg, vec1)}
+\NormalTok{\}}
+
+\NormalTok{avg}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4002610 0.2855916 0.2234795 0.1524908 0.1433546
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dat3, }\KeywordTok{aes}\NormalTok{(vec)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ ama), }\DataTypeTok{color =} \StringTok{"purple"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ als), }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ aint), }\DataTypeTok{color =} \StringTok{"green"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ avg)) }\OperatorTok{+}
+\StringTok{  }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : span too small. fewer data values than degrees of freedom.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : pseudoinverse used at 0.98
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : neighborhood radius 2.02
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : reciprocal condition number 0
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : There are other near singularities as well. 4.0804
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : span too small.
+## fewer data values than degrees of freedom.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : pseudoinverse used
+## at 0.98
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : neighborhood radius
+## 2.02
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : reciprocal
+## condition number 0
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : There are other
+## near singularities as well. 4.0804
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  D vs Time Pressure (points \& jitter)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dtp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{ftp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mtp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{tp <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, timepressure }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, timepressure }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, timepressure }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  dtp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dtp, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{timepressure))}
+\NormalTok{  ftp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(ftp, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{timepressure))}
+\NormalTok{  mtp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(mtp, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{timepressure))}
+\NormalTok{\}}
+
+
+\NormalTok{dtp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(tp, }\DataTypeTok{atp =}\NormalTok{ dtp, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{mtp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(tp, }\DataTypeTok{atp =}\NormalTok{ mtp, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{ftp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(tp, }\DataTypeTok{atp =}\NormalTok{ ftp, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{tp_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(mtp_dat, }\KeywordTok{full_join}\NormalTok{(ftp_dat, dtp_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("tp", "atp", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{verbatim}
+## Joining, by = c("tp", "atp", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factor and character vector, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tp_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(tp_dat}\OperatorTok{$}\NormalTok{G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dtp_dat, }\KeywordTok{aes}\NormalTok{(tp, atp)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tp_dat, }\KeywordTok{aes}\NormalTok{(tp, atp, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-16-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(timepressure }\OperatorTok{<}\StringTok{ }\DecValTok{6}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(timepressure, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-16-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(dtp_dat}\OperatorTok{$}\NormalTok{atp, dtp_dat}\OperatorTok{$}\NormalTok{tp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5598491
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(timepressure }\OperatorTok{<}\StringTok{ }\DecValTok{6}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(timepressure) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 2
+##   timepressure `n()`
+##          <dbl> <int>
+## 1            1  1255
+## 2            2  1292
+## 3            3  1045
+## 4            4   322
+## 5            5   234
+\end{verbatim}
+
+B. TIME AMOUNTS a. D vs Personal Hours (points \& jitter)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dhp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fhp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mhp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{hp <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, hrs_personal }\OperatorTok{<}\StringTok{ }\NormalTok{i}\OperatorTok{*}\DecValTok{4}\NormalTok{, hrs_personal }\OperatorTok{>=}\StringTok{ }\NormalTok{(i}\DecValTok{-1}\NormalTok{)}\OperatorTok{*}\DecValTok{4}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\CommentTok{#  dM <- filter(dcom1, hrs_personal == i, age > 64, sex == 1)}
+\CommentTok{#  dF <- filter(dcom1, hrs_personal == i, age > 64, sex == 2)}
+\NormalTok{  dhp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dhp, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{hrs_personal))}
+\CommentTok{#  fhp <- append(fhp, sum(dF$dwtr) / length(dF$hrs_personal))}
+\CommentTok{#  mhp <- append(mhp, sum(dM$dwtr) / length(dM$hrs_personal))}
+\NormalTok{\}}
+
+
+\NormalTok{dhp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(hp, }\DataTypeTok{ahp =}\NormalTok{ dhp, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\CommentTok{#mhp_dat <- data.frame(hp, ahp = mhp, G = "M")}
+\CommentTok{#fhp_dat <- data.frame(hp, ahp = fhp, G = "F")}
+\CommentTok{#hp_dat <- full_join(mhp_dat, full_join(fhp_dat, dhp_dat))}
+\CommentTok{#hp_dat$G <- as.factor(hp_dat$G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dhp_dat, }\KeywordTok{aes}\NormalTok{(hp, ahp)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dhp_dat, }\KeywordTok{aes}\NormalTok{(hp, ahp)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-17-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#ggplot(hp_dat, aes(hp, ahp, color = G)) + geom_point(size = 2) + geom_smooth(se = FALSE, method = "lm") + y_scale}
+
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(hrs_personal }\OperatorTok{<}\StringTok{ }\DecValTok{20}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(hrs_personal, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-17-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(dhp_dat}\OperatorTok{$}\NormalTok{hp, dhp_dat}\OperatorTok{$}\NormalTok{ahp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.7313883
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  D vs Leisure Hours (pt, jitter, smooth needs work)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dhl <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fhl <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mhl <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{hl <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{13}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{13}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, hrs_leisure }\OperatorTok{<}\StringTok{ }\NormalTok{i}\OperatorTok{*}\DecValTok{5}\NormalTok{, hrs_leisure }\OperatorTok{>}\StringTok{ }\NormalTok{(i}\DecValTok{-1}\NormalTok{)}\OperatorTok{*}\DecValTok{5}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+  \CommentTok{#dM <- filter(dcom1, hrs_leisure == i, age > 64, sex == 1)}
+  \CommentTok{#dF <- filter(dcom1, hrs_leisure == i, age > 64, sex == 2)}
+\NormalTok{  dhl <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dhl, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{hrs_leisure))}
+  \CommentTok{#fhl <- append(fhl, sum(dF$dwtr) / length(dF$hrs_leisure))}
+  \CommentTok{#mhl <- append(mhl, sum(dM$dwtr) / length(dM$hrs_leisure))}
+\NormalTok{\}}
+
+
+\NormalTok{dhl_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(hl, }\DataTypeTok{ahl =}\NormalTok{ dhl, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\CommentTok{#mhl_dat <- data.frame(hl, ahl = mhl, G = "M")}
+\CommentTok{#fhl_dat <- data.frame(hl, ahl = fhl, G = "F")}
+\CommentTok{#hl_dat <- full_join(mhl_dat, full_join(fhl_dat, dhl_dat))}
+\CommentTok{#hl_dat$G <- as.factor(hl_dat$G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dhl_dat, }\KeywordTok{aes}\NormalTok{(hl, ahl)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{se =}\NormalTok{ F) }\CommentTok{#+ y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing non-finite values (stat_smooth).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dhl_dat, }\KeywordTok{aes}\NormalTok{(hl, ahl)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_col}\NormalTok{() }\CommentTok{#+ y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (position_stack).
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-18-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#ggplot(hl_dat, aes(hl, ahl, color = G)) + geom_point(size = 2) + y_scale}
+
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(hrs_leisure }\OperatorTok{<}\StringTok{ }\DecValTok{65}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(hrs_leisure, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-18-3.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  D vs \# Services (pts \& jitter) (CHECK KEY)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dsvp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fsvp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{msvp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{svp <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, relig_svc_per }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, relig_svc_per }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, relig_svc_per }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  dsvp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dsvp, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{relig_svc_per))}
+\NormalTok{  fsvp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(fsvp, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{relig_svc_per))}
+\NormalTok{  msvp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(msvp, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{relig_svc_per))}
+\NormalTok{\}}
+
+
+\NormalTok{dsvp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(svp, }\DataTypeTok{asvp =}\NormalTok{ dsvp, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{msvp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(svp, }\DataTypeTok{asvp =}\NormalTok{ msvp, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{fsvp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(svp, }\DataTypeTok{asvp =}\NormalTok{ fsvp, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{svp_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(msvp_dat, }\KeywordTok{full_join}\NormalTok{(fsvp_dat, dsvp_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("svp", "asvp", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{verbatim}
+## Joining, by = c("svp", "asvp", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factor and character vector, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{svp_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(svp_dat}\OperatorTok{$}\NormalTok{G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dsvp_dat, }\KeywordTok{aes}\NormalTok{(svp, asvp)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(svp_dat, }\KeywordTok{aes}\NormalTok{(svp, asvp, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-19-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(relig_svc_per }\OperatorTok{<}\StringTok{ }\DecValTok{7}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(relig_svc_per, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-19-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{relyn =} \KeywordTok{ifelse}\NormalTok{(relig }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(relyn) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{<}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{n}\NormalTok{(), }\KeywordTok{sum}\NormalTok{(dwtr))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   relyn `n()` `sum(dwtr)`
+##   <dbl> <int>       <dbl>
+## 1     0  1069           0
+## 2     1   616           0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(relig) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{sum}\NormalTok{(dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 8 x 2
+##   relig `sum(dwtr)/n()`
+##   <dbl>           <dbl>
+## 1     0          0.152 
+## 2     1          0.178 
+## 3     2          0.219 
+## 4     8          0.196 
+## 5    10          0.137 
+## 6    13          0.0714
+## 7    97          0.267 
+## 8    99          0.301
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# yes I should have done everything this way but I only realized that just now oops}
+\end{Highlighting}
+\end{Shaded}
+
+Whether Hospitalized
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dwh <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fwh <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mwh <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{wh <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, wtr_hospital }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, wtr_hospital }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, wtr_hospital }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  dwh <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dwh, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{wtr_hospital))}
+\NormalTok{  fwh <-}\StringTok{ }\KeywordTok{append}\NormalTok{(fwh, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{wtr_hospital))}
+\NormalTok{  mwh <-}\StringTok{ }\KeywordTok{append}\NormalTok{(mwh, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{wtr_hospital))}
+\NormalTok{\}}
+
+
+\NormalTok{dwh_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(wh, }\DataTypeTok{awh =}\NormalTok{ dwh, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{mwh_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(wh, }\DataTypeTok{awh =}\NormalTok{ mwh, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{fwh_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(wh, }\DataTypeTok{awh =}\NormalTok{ fwh, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{wh_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(mwh_dat, }\KeywordTok{full_join}\NormalTok{(fwh_dat, dwh_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("wh", "awh", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{verbatim}
+## Joining, by = c("wh", "awh", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factor and character vector, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wh_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(wh_dat}\OperatorTok{$}\NormalTok{G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dwh_dat, }\KeywordTok{aes}\NormalTok{(wh, awh)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(wh_dat, }\KeywordTok{aes}\NormalTok{(wh, awh, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-20-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(wtr_hospital }\OperatorTok{<}\StringTok{ }\DecValTok{6}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(wtr_hospital, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-20-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, wtr_hospital }\OperatorTok{<}\StringTok{ }\DecValTok{6}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(wtr_hospital, dwtr)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-20-4.pdf}
+
+Prescription \& Other Expenses
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dexp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fexp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mexp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{exp <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, exp_presc_etc }\OperatorTok{<=}\StringTok{ }\NormalTok{i}\OperatorTok{*}\DecValTok{1000}\NormalTok{, exp_presc_etc }\OperatorTok{>}\StringTok{ }\NormalTok{(i }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}\OperatorTok{*}\DecValTok{1000}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dexp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dexp, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{exp_presc_etc))}
+\NormalTok{\}}
+
+
+\NormalTok{dexp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(exp, }\DataTypeTok{aexp =}\NormalTok{ dexp, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dexp_dat, }\KeywordTok{aes}\NormalTok{(exp, aexp)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dexp_dat, }\KeywordTok{aes}\NormalTok{(exp, aexp)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (position_stack).
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-21-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#ggplot(exp_dat, aes(exp, aexp, color = G)) + geom_point(size = 2)}
+
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(exp_presc_etc }\OperatorTok{<}\StringTok{ }\DecValTok{10000}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(exp_presc_etc, dwtr)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-21-3.pdf}
+
+Hospital \& Nursing Expenses
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dehn <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{fehn <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{mehn <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{ehn <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, }
+\NormalTok{               exp_hosp_nursing }\OperatorTok{<=}\StringTok{ }\NormalTok{i}\OperatorTok{*}\DecValTok{1000}\NormalTok{, }
+\NormalTok{               exp_hosp_nursing }\OperatorTok{>}\StringTok{ }\NormalTok{(i }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}\OperatorTok{*}\DecValTok{1000}\NormalTok{, }
+\NormalTok{               age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{,}
+\NormalTok{               wtr_hospital }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{)}
+\NormalTok{  dehn <-}\StringTok{ }\KeywordTok{append}\NormalTok{(dehn, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{exp_hosp_nursing))}
+\NormalTok{\}}
+
+
+\NormalTok{dehn_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(ehn, }\DataTypeTok{aehn =}\NormalTok{ dehn, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+
+
+\KeywordTok{ggplot}\NormalTok{(dehn_dat, }\KeywordTok{aes}\NormalTok{(ehn, aehn)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dehn_dat, }\KeywordTok{aes}\NormalTok{(ehn, aehn)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (position_stack).
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-22-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#ggplot(ehn_dat, aes(ehn, aehn, color = G)) + geom_point(size = 2)}
+
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(exp_hosp_nursing }\OperatorTok{<}\StringTok{ }\DecValTok{10000}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(exp_hosp_nursing, dwtr)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-22-3.pdf}
+
+Whether Employed
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{demp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{femp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{memp <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{emp <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{)) \{}
+\NormalTok{  d6 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, Remploy }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{)}
+\NormalTok{  dM <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, Remploy }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  dF <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(dcom1, Remploy }\OperatorTok{==}\StringTok{ }\NormalTok{i, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{, sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  demp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(demp, }\KeywordTok{sum}\NormalTok{(d6}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(d6}\OperatorTok{$}\NormalTok{Remploy))}
+\NormalTok{  femp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(femp, }\KeywordTok{sum}\NormalTok{(dF}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dF}\OperatorTok{$}\NormalTok{Remploy))}
+\NormalTok{  memp <-}\StringTok{ }\KeywordTok{append}\NormalTok{(memp, }\KeywordTok{sum}\NormalTok{(dM}\OperatorTok{$}\NormalTok{dwtr) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(dM}\OperatorTok{$}\NormalTok{Remploy))}
+\NormalTok{\}}
+
+
+\NormalTok{demp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(emp, }\DataTypeTok{aemp =}\NormalTok{ demp, }\DataTypeTok{G =} \StringTok{"A"}\NormalTok{)}
+\NormalTok{memp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(emp, }\DataTypeTok{aemp =}\NormalTok{ memp, }\DataTypeTok{G =} \StringTok{"M"}\NormalTok{)}
+\NormalTok{femp_dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(emp, }\DataTypeTok{aemp =}\NormalTok{ femp, }\DataTypeTok{G =} \StringTok{"F"}\NormalTok{)}
+\NormalTok{emp_dat <-}\StringTok{ }\KeywordTok{full_join}\NormalTok{(memp_dat, }\KeywordTok{full_join}\NormalTok{(femp_dat, demp_dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("emp", "aemp", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factors with different levels, coercing to
+## character vector
+\end{verbatim}
+
+\begin{verbatim}
+## Joining, by = c("emp", "aemp", "G")
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `G` joining factor and character vector, coercing into
+## character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{emp_dat}\OperatorTok{$}\NormalTok{G <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(emp_dat}\OperatorTok{$}\NormalTok{G)}
+
+
+\KeywordTok{ggplot}\NormalTok{(demp_dat, }\KeywordTok{aes}\NormalTok{(emp, aemp)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(emp_dat, }\KeywordTok{aes}\NormalTok{(emp, aemp, }\DataTypeTok{color =}\NormalTok{ G)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{y_scale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-23-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcom1 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Remploy }\OperatorTok{<}\StringTok{ }\DecValTok{9}\NormalTok{, age }\OperatorTok{>}\StringTok{ }\DecValTok{64}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(Remploy, dscore)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Dementia_Working_Final_files/figure-latex/unnamed-chunk-23-3.pdf}
+
+Graph edits: - labels \& titles
+
+
+\end{document}
